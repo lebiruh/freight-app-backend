@@ -29,6 +29,14 @@
     "new to Freight App": "ለፍሬት አፕ አዲስ ኖት?",
     "join now": "አሁን ይቀላቀሉ"
   },
+  "details": {
+    "startLocation": "የሚጫንበት ቦታ",
+    "dropoffLocation": "የሚራገፍበት ቦታ",
+    "loadAmount": "ክብደት",
+    "truckType": "የጭነት መኪና ዓይነት",
+    "price": "ዋጋ",
+    "additionaldetails": "ተጨማሪ ዝርዝሮች"
+  },
   "footer": {
     "getInTouch": "እኛን ያግኙን",
     "quickLinks": "ፈጣን አገናኞች",

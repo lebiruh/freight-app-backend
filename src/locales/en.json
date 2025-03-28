@@ -29,6 +29,14 @@
     "new to Freight App": "New to Freight App",
     "join now": "Join now"
   },
+  "details": {
+    "startLocation": "Start Location",
+    "dropoffLocation": "Destination",
+    "loadAmount": "Load Amount",
+    "truckType": "Truck Type",
+    "price": "Price",
+    "additionaldetails": "Additional Details"
+  },
   "footer": {
     "getInTouch": "Get In Touch",
     "quickLinks": "Quick Links",

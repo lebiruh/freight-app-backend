@@ -14,10 +14,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getPendingOrdersById } from '../../helpers/Orders'; 
 import Grid from '@mui/material/Grid';
 
+import {useTranslation} from "react-i18next"
+
 const CustomerJobDetailsPage = () => {
 
     const { jobId } = useParams();
     const navigate = useNavigate();
+
+    const {t} = useTranslation();
 
    
     const query = useQuery({
@@ -65,38 +69,38 @@ const CustomerJobDetailsPage = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Start Location:
+                            {t("details.startLocation")}:
                         </Typography>
                         <Typography>{job[0]?.start_location}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Destination:
+                            {t("details.dropoffLocation")}:
                         </Typography>
                         <Typography>{job[0]?.end_location}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Load Amount:
+                            {t("details.loadAmount")}:
                         </Typography>
                         <Typography>{`${job[0]?.weight} ${job[0]?.weight_unit}`}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Truck Type:
+                            {t("details.truckType")}:
                         </Typography>
                         <Typography>{job[0]?.type}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Price:
+                            {t("details.price")}:
                         </Typography>
                         <Typography>{`${job[0]?.price} ETB/${job[0]?.price_unit}`}</Typography>
                     </Grid>
                     {/* Add more details here based on the properties of your job object */}
                     <Grid item xs={12}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
-                            Additional Details:
+                            {t("details.additionaldetails")}:
                         </Typography>
                         <Typography>
                             {/* You can add more specific details here based on your job object */}
