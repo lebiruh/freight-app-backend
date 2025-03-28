@@ -1,0 +1,43 @@
+{
+  "home": {
+    "home": "ዋና ገጽ",
+    "orderFreight": "ጭነት ያስይዙ",
+    "about": "ስለ እኛ",
+    "contactUs": "ያግኙን",
+    "load": "የጭነት መጠን",
+    "truck": "የጭነት መኪና ዓይነት",
+    "price": "ዋጋ"
+  },
+  "orderFreight": {
+    "submitOrder": "ትዕዛዝ አስገባ",
+    "fullName": "ሙሉ ስም",
+    "phone": "የስልክ ቁጥር",
+    "weight": "ክብደት",
+    "pickupLocation": "የሚጫንበት ቦታ",
+    "dropoffLocation": "የሚራገፍበት ቦታ",
+    "price": "ዋጋ",
+    "kg": "ኪሎግራም",
+    "qtl": "ኩንታል",
+    "submit": "አስገባ"
+  },
+  "login": {
+    "sing in": "በመለያ ይግቡ",
+    "sign in to order a freight": "ጭነት ለማዘዝ በመለያ ይግቡ",
+    "phone": "የስልክ ቁጥር",
+    "password": "የይለፍ ቃል",
+    "forgot password": "የይለፍ ቃልዎን ረሱት?",
+    "new to Freight App": "ለፍሬት አፕ አዲስ ኖት?",
+    "join now": "አሁን ይቀላቀሉ"
+  },
+  "footer": {
+    "getInTouch": "እኛን ያግኙን",
+    "quickLinks": "ፈጣን አገናኞች",
+    "about": "ስለ እኛ",
+    "contactUs": "ያግኙን"
+  },
+  "language": {
+    "select": "አማ",
+    "amharic": "አማ",
+    "english": "እን"
+  }
+}

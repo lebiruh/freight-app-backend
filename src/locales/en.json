@@ -1,0 +1,43 @@
+{
+  "home": {
+    "home": "Home",
+    "orderFreight": "Order Freight",
+    "about": "About",
+    "contactUs": "Contact Us",
+    "load": "Load",
+    "truck": "Truck",
+    "price": "Price"
+  },
+  "orderFreight": {
+    "submitOrder": "Submit Order",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "weight": "Weight",
+    "pickupLocation": "Pickup Location",
+    "dropoffLocation": "Dropoff Location",
+    "price": "Price",
+    "kg": "kg",
+    "qtl": "qtl",
+    "submit": "Submit"
+  },
+  "login": {
+    "sing in": "Sing in",
+    "sign in to order a freight": "Sign in to order a freight",
+    "phone": "Phone",
+    "password": "Password",
+    "forgot password": "Forgot password?",
+    "new to Freight App": "New to Freight App",
+    "join now": "Join now"
+  },
+  "footer": {
+    "getInTouch": "Get In Touch",
+    "quickLinks": "Quick Links",
+    "about": "About",
+    "contactUs": "Contact Us"
+  },
+  "language": {
+    "select": "EN",
+    "amharic": "am",
+    "english": "en"
+  }
+}

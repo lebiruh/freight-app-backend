@@ -4,14 +4,14 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 // import ShoaLogo from "../../assets/shoa_homes_logo.jpg"
 import "./CustomerNavbar.css"
-import {useLocation} from "react-router"
+import {useLocation} from "react-router";
+
+import { IoCaretDownOutline } from "react-icons/io5";
+
+import {useTranslation} from "react-i18next"
+import "../../i18n"
 
 
-const navigation = [
-  { name: 'Home', href: '/'},
-  { name: 'About', href: 'about'},
-  { name: 'Contact Us', href: 'contact'},
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -23,9 +23,19 @@ const Navbar = () => {
   // const [loading, setLoading] = useState(true);
   // const [navigation, setNavigation] = useState(initialNavigation);
 
+  const {t, i18n} = useTranslation();
+
   let location = useLocation()
 
   const pathName = location.pathname.split('/')[1];
+
+
+  const navigation = [
+  { name: t("home.home"), href: '/'},
+  { name: t("home.orderFreight"), href: '/user/order-freight'},
+  { name: t("home.about"), href: '/about'},
+  { name: t("home.contactUs"), href: '/contact'},
+]
 
   // const handleNavigationClick = () => {
   //     setNavigation(prevNavigation =>
@@ -47,6 +57,15 @@ const Navbar = () => {
     // const shoaHomes = "SHOA".split("");
 
     // console.log(shoaHomes);
+
+    const changeLanguage = (language) => {
+
+      i18n.changeLanguage(language);
+      localStorage.setItem("i18nextLng", language)
+      
+    }
+
+
 
   return (
     <>
@@ -116,6 +135,46 @@ const Navbar = () => {
                   ))}
                 </div>
               </div>
+              {/* Change Language dropdown begin*/}
+            <Menu as="div" className="relative ml-3">
+              <div>
+                <MenuButton className="relative flex justify-center items-center text-white text-sm focus:outline-hidden cursor-pointer p-[2px]">
+                  <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Open language menu</span>
+                  {/* <img
+                    alt=""
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    className="size-8 rounded-full"
+                  /> */}
+                  <span className=''>{t("language.select")}</span>
+                  <IoCaretDownOutline />
+                </MenuButton>
+              </div>
+              <MenuItems
+                transition
+                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+              >
+                               
+                <MenuItem onClick={() => changeLanguage("am")}>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                  >
+                    {t("language.amharic")}
+                  </a>
+                </MenuItem>
+                <MenuItem onClick={() => changeLanguage("en")}>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                  >
+                    {t("language.english")}
+                  </a>
+                </MenuItem>
+              </MenuItems>
+            </Menu>
+            {/* Change Language dropdown end*/}
+
               {/* Profile dropdown begin*/}
             <Menu as="div" className="relative ml-3">
               <div>

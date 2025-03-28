@@ -37,6 +37,11 @@ const NAVIGATION = [
     icon: <ShoppingCartIcon />,
     children: [
       {
+        segment: 'available',
+        title: 'Available',
+        icon: <AddShoppingCartIcon />,
+      },
+      {
         segment: 'pending',
         title: 'Pending',
         icon: <AddShoppingCartIcon />,
