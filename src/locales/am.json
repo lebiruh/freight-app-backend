@@ -37,6 +37,18 @@
     "price": "ዋጋ",
     "additionaldetails": "ተጨማሪ ዝርዝሮች"
   },
+  "orderFreightModal": {
+    "fullName": "ሙሉ ስም",
+    "phone": "የስልክ ቁጥር",
+    "weight": "ክብደት",
+    "truckType": "የጭነት መኪና ዓይነት",
+    "pickupLocation": "የሚጫንበት ቦታ",
+    "dropoffLocation": "የሚራገፍበት ቦታ",
+    "price": "ዋጋ",
+    "kg": "ኪሎግራም",
+    "qtl": "ኩንታል",
+    "additionaldetails": "ተጨማሪ ዝርዝሮች"
+  },
   "footer": {
     "getInTouch": "እኛን ያግኙን",
     "quickLinks": "ፈጣን አገናኞች",

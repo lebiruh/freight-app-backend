@@ -37,6 +37,18 @@
     "price": "Price",
     "additionaldetails": "Additional Details"
   },
+  "orderFreightModal": {
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "weight": "Weight",
+    "truckType": "Truck Type",
+    "pickupLocation": "Pickup Location",
+    "dropoffLocation": "Dropoff Location",
+    "price": "Price",
+    "kg": "kg",
+    "qtl": "qtl",
+    "additionaldetails": "Additional Details"
+  },
   "footer": {
     "getInTouch": "Get In Touch",
     "quickLinks": "Quick Links",

@@ -85,6 +85,16 @@ const CustomerHomePage = () => {
     navigate(`/job-details/${jobId}`);
   };
 
+  if (query?.isLoading) {
+        return (
+          <div className="container-xxl h- bg-white p-0">
+            <div className="w-full h-[90vh] bg-white p-0">
+              Loading available jobs...
+            </div>
+          </div>
+        )        
+    }
+
 
 
   return (

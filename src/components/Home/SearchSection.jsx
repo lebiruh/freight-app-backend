@@ -11,10 +11,13 @@ import {
 import { addOrder } from "../../helpers/Orders"
 
 import { CgDanger } from "react-icons/cg";
+import CustomerFreightRequestModal from "../Customer/CustomerFreightRequestModal"
 
 
 
 const SearchSection = () => {
+
+  const [open, setOpen] = useState(false)
 
   const [order, setOrder] = useState({
     userId:'', name: '', phone: '', truck: '', weight: '', weightUnit:'', status: 'pending', source: '', destination: '', price: '', priceUnit: ''
@@ -206,13 +209,18 @@ const SearchSection = () => {
     //   alert("Please fill in all the required fields!");
     //   return
     // }
-    addOrderMutation.mutate(order);
-    clearOrder();
+    
+    // addOrderMutation.mutate(order);
+    // clearOrder();
+
+    setOpen(true);
+
   }
 
 
   return (
     <div className="p-2 md:p-5 border-[2px] rounded-xl border-gray-200">
+      <CustomerFreightRequestModal open={open} setOpen={setOpen} order={order} addOrderMutation={addOrderMutation} clearOrder={clearOrder}/>
       <p className="text-[20px] font-bold">Submit Order</p>
 
       <form action="">
@@ -244,6 +252,7 @@ const SearchSection = () => {
 
         <button className="bg-black w-full text-white rounded-lg mt-5 p-3 cursor-pointer" onClick={handleSubmit}>Submit</button>
       </form>
+      
     </div>
   )
 }
