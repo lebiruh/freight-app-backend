@@ -35,12 +35,7 @@ const NAVIGATION = [
     segment: 'admin/orders',
     title: 'Orders',
     icon: <ShoppingCartIcon />,
-    children: [
-      {
-        segment: 'available',
-        title: 'Available',
-        icon: <AddShoppingCartIcon />,
-      },
+    children: [      
       {
         segment: 'pending',
         title: 'Pending',
@@ -50,6 +45,11 @@ const NAVIGATION = [
         segment: 'active',
         title: 'Active',
         icon: <ShoppingCartIcon />,
+      },
+      {
+        segment: 'delivered',
+        title: 'Delivered',
+        icon: <AddShoppingCartIcon />,
       },
       {
         segment: 'cancelled',
@@ -69,8 +69,18 @@ const NAVIGATION = [
         icon: <AccountBoxIcon />,
       },
       {
+        segment: 'client/register',
+        title: 'Register Client',
+        icon: <AccountBoxOutlinedIcon />,
+      },
+      {
         segment: 'team',
         title: 'Drivers/Truck Owners',
+        icon: <AccountBoxOutlinedIcon />,
+      },
+      {
+        segment: 'truck/register',
+        title: 'Register Truck',
         icon: <AccountBoxOutlinedIcon />,
       },
     ],
@@ -114,7 +124,7 @@ const NAVIGATION = [
   {
     segment: 'admin/dispatch',
     title: 'DispatchPanel',
-    icon: <LayersIcon />,
+    icon: <LayersIcon />
   },
   {
     kind: 'divider',

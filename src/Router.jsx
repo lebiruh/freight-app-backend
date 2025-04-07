@@ -13,10 +13,12 @@ import { Routes, Route } from "react-router";
 import CustomerPage from "./pages/CustomerPage";
 import Dispatch from "./components/AdminPanel/Dispatch";
 import CustomerFreightRequestPage from "./components/Customer/CustomerFreighRequestPage";
-import OrdersAvailable from "./components/AdminPanel/OrdersAvailable";
+import OrdersDelivered from "./components/AdminPanel/OrdersDelivered";
 import CustomerLoginPage from "./pages/CustomerLoginPage/CustomerLoginPage";
 import CustomerProtectedRoute from "./components/ProtectedRoutes/CustomerProtectedRoute";
 import CustomerJobDetailsPage from "./components/Customer/CustomerJobDetailsPage";
+import CustomerRegisterClient from "./components/AdminPanel/CustomerRegisterClient";
+import CustomerRegisterTruck from "./components/AdminPanel/CustomerRegisterTruck";
 
 
 const Routing = () => {
@@ -33,14 +35,17 @@ const Routing = () => {
       </Route>      
       <Route path="/admin" element={<AdminPanelMain/>}>
           <Route path="" element={<DashboardContent/>} />
-          <Route path="orders/available"element={<OrdersAvailable/>} />
           <Route path="orders/pending"element={<OrdersPending/>} />
           <Route path="orders/active"element={<OrdersActive/>} />
+          <Route path="orders/delivered"element={<OrdersDelivered/>} />
           <Route path="orders/cancelled"element={<OrdersCancelled/>} />
           <Route path="customers/clients"element={<CustomersClients/>} />
+          <Route path="customers/client/register"element={<CustomerRegisterClient/>} />
           <Route path="customers/team"element={<CustomersDrivers/>} />
+          <Route path="customers/truck/register"element={<CustomerRegisterTruck/>} />
           <Route path="reports/sales"element={<Sales/>} />
           <Route path="dispatch"element={<Dispatch/>} />
+          <Route path="dispatch/:freightId"element={<Dispatch/>} />
           <Route path="settings/profile"element={<Sales/>} />
       </Route>
 
