@@ -1,12 +1,4 @@
-import React from 'react';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton,
-  Divider,
-} from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
 import {
   Table,
@@ -18,7 +10,6 @@ import {
   Paper,
 } from '@mui/material';
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router";
 // import GoogleMapSection from "../Home/GoogleMapSection"
 // import SearchSection from "../Home/SearchSection"
@@ -26,66 +17,72 @@ import { useNavigate } from "react-router";
 import {
   useQuery
 } from '@tanstack/react-query';
+import { IoMdSearch } from "react-icons/io";
 
 import {getPendingOrders} from '../../helpers/Orders'
 
-import {useTranslation} from "react-i18next"
+
+import AllAvailableJobs from './AvailableJobs/AllAvailableJobs';
+
+import './styles/customerHomePage.css'
+import AvailabeJobsBySearch from './AvailableJobs/AvailabeJobsBySearch';
 
 
 
 const CustomerHomePage = () => {
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+
 
   // Available Freight Job Queries
-  const query = useQuery({ queryKey: ['pending'], queryFn: () => getPendingOrders() })
+  const allJobs = useQuery({ queryKey: ['pending'], queryFn: () => getPendingOrders() })
 
-  console.log("Pending orders are: ", query?.data);
+  // console.log("Pending orders are: ", allJobs?.data);
 
-  const {t} = useTranslation();
+  // const searchResults = useQuery({queryKey:['searchResults', debouncedQuery], 
+  //   queryFn: (debouncedQuery) => getPendingOrdersBySearch(debouncedQuery), 
+  //   enabled: !!debouncedQuery,
+  //   staleTime: 1000 * 60 * 5
+  // })
 
-  // const jobs = [
-  //   {
-  //     id: 1,
-  //     startLocation: 'Los Angeles, CA',
-  //     destination: 'Chicago, IL',
-  //     loadAmount: '40,000 lbs',
-  //     truckType: 'Reefer',
-  //     price: 3500,
-  //   },
-  //   {
-  //     id: 2,
-  //     startLocation: 'Dallas, TX',
-  //     destination: 'Miami, FL',
-  //     loadAmount: '35,000 lbs',
-  //     truckType: 'Flatbed',
-  //     price: 2800,
-  //   },
-  //   {
-  //     id: 3,
-  //     startLocation: 'Seattle, WA',
-  //     destination: 'Denver, CO',
-  //     loadAmount: '45,000 lbs',
-  //     truckType: 'Dry Van',
-  //     price: 3200,
-  //   },
-  //     {
-  //     id: 4,
-  //     startLocation: 'New York, NY',
-  //     destination: 'Atlanta, GA',
-  //     loadAmount: '38,000 lbs',
-  //     truckType: 'Reefer',
-  //     price: 3000,
-  //   },
-  // ];
+  // const searchResults = useQuery({queryKey:['searchResults', searchQuery], 
+  //   queryFn: ({queryKey}) => {
+  //     const actualSearchQuery = queryKey[1];
+  //     getPendingOrdersBySearch(actualSearchQuery)}, 
+  //   enabled: !!searchQuery,
+  //   // staleTime: 1000 * 60 * 5,
+  //   onError: (error) => {
+  //   console.error("Error fetching search results:", error);
+  //   }
+  // })
+
 
   const navigate = useNavigate();
+
+  const handleOnSearchInputChange = (e) => {
+    e.stopPropagation();
+    // setIsDisplayOpen(false);
+    setSearchQuery(e.target.value);
+  }
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+
+    return () => clearTimeout(handler)
+    }, 300)
+  },[searchQuery])
+
+  console.log("allJobs on home page is: ", searchQuery);
+  // console.log("debouncedQuery on home page is: ", debouncedQuery);
 
 
   const handleJobClick = (jobId) => {
     navigate(`/job-details/${jobId}`);
   };
 
-  if (query?.isLoading) {
+  if (allJobs?.isLoading) {
         return (
           <div className="container-xxl h- bg-white p-0">
             <div className="w-full h-[90vh] bg-white p-0">
@@ -100,35 +97,25 @@ const CustomerHomePage = () => {
   return (
     <div className="container-xxl bg-white p-0">
         <div className="w-full bg-white p-0">
+          <div className="input">
+            <IoMdSearch color='#3B3D3E' style={{ width: '25px', height: '25px' }}/>
+            <input type="text" placeholder="Search" value={searchQuery} onChange={handleOnSearchInputChange}/>
+          </div>
+          <div className="input_small_screen">
+            <IoMdSearch color='#3B3D3E' style={{ width: '25px', height: '25px' }}/>
+            <input type="text" placeholder="Search" value={searchQuery} onChange={handleOnSearchInputChange}/>
+          </div>
           <div className="flex flex-col-reverse md:flex-row items-center gap-0">
             <div className="md:w-1/2 p-5 lg:mt-5 text-center">
               <h1 className="text-2xl font-bold mb-4">Available Freight Jobs</h1>
             </div>
-          </div>
+          </div>          
         </div>
         <div>
-          <List>
-            {query?.data?.map((job) => (
-              <React.Fragment key={job.freightId}>
-                <ListItem
-                  // button
-                  onClick={() => handleJobClick(job.freightId)}
-                  sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' } }} // Optional hover effect
-                >
-                  <ListItemText
-                    primary={`${job.start_location} to ${job.end_location}`}
-                    secondary={`${t("home.load")}: ${job.weight} ${job?.weight_unit}, ${t("home.truck")}: ${job.type}, ${t("home.price")}: ${job.price} ETB/${job?.price_unit}`}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="details" onClick={() => handleJobClick(job.freightId)}>
-                      <ArrowForwardIosIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
-          </List>
+          {/* <AvailabeJobsBySearch searchQuery={searchQuery} handleJobClick={handleJobClick}/> */}
+          {
+            searchQuery ? <AvailabeJobsBySearch debouncedQuery={debouncedQuery} handleJobClick={handleJobClick}/> : <AllAvailableJobs allJobs={allJobs} handleJobClick={handleJobClick}/>
+          }          
 
           {/* <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="job listings table">

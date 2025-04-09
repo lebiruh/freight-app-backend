@@ -36,7 +36,7 @@ export const getPendingOrders = async () => {
     const response = await axios.get(`${baseURL}/api/orders/pending`);
 
     const posts = response.data;
-
+    // console.log("All pending order on helper is: ");
     return posts;
 
   } catch (error) {
@@ -58,6 +58,33 @@ export const getPendingOrdersById = async (jobId) => {
 
     const posts = response.data;
 
+    return posts;
+
+  } catch (error) {
+    console.log(error);
+    const errorData = error.response.data;
+    throw new Error(errorData.message || 'Fetching pending orders failed.');
+  }
+
+};
+
+export const getPendingOrdersBySearch = async (searchQuery) => {
+
+  // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
+
+  // const token = userData?.token
+
+  console.log("searchQuery on helper is: ", searchQuery);
+
+  if(searchQuery.startsWith(" ")) {
+    return
+  }
+
+  try {
+    const response = await axios.get(`${baseURL}/api/find-orders/pending/search?q=${searchQuery}`);
+    
+    const posts = response.data;
+    console.log("result on helper is: ", posts);
     return posts;
 
   } catch (error) {
