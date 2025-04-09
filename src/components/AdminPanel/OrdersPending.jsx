@@ -24,7 +24,7 @@ const OrdersPending = () => {
                   return {...value, id};
                 })
 
-  console.log("Rows Pending orders for admin are: ", rows);
+  // console.log("Rows Pending orders for admin are: ", rows);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },

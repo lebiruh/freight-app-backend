@@ -12,6 +12,8 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { HiClipboardDocumentList } from "react-icons/hi2";
+import { FaTruckMoving } from "react-icons/fa6";
 // import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
@@ -57,7 +59,32 @@ const NAVIGATION = [
         icon: <RemoveShoppingCartOutlinedIcon />,
       },
     ],
-  },  
+  },
+  {
+    segment: 'admin/customer/register',
+    title: 'Register',
+    icon: <HiClipboardDocumentList />,
+    children: [
+      {
+        segment: 'client',
+        title: 'Register Client',
+        icon: <AccountBoxOutlinedIcon />,
+      },
+      {
+        segment: 'truck-owner',
+        title: 'Register Truck Owner',
+        icon: <AccountBoxOutlinedIcon />,
+      },
+      {
+        segment: 'truck',
+        title: 'Register Truck',
+        icon: <FaTruckMoving />,
+      },
+    ]
+  },
+  {
+    kind: 'divider',
+  }, 
   {
     segment: 'admin/customers',
     title: 'Customers',
@@ -67,22 +94,12 @@ const NAVIGATION = [
         segment: 'clients',
         title: 'Clients',
         icon: <AccountBoxIcon />,
-      },
-      {
-        segment: 'client/register',
-        title: 'Register Client',
-        icon: <AccountBoxOutlinedIcon />,
-      },
+      },      
       {
         segment: 'team',
         title: 'Drivers/Truck Owners',
         icon: <AccountBoxOutlinedIcon />,
-      },
-      {
-        segment: 'truck/register',
-        title: 'Register Truck',
-        icon: <AccountBoxOutlinedIcon />,
-      },
+      },      
     ],
   },  
   {
@@ -144,7 +161,7 @@ const NAVIGATION = [
         icon: <DescriptionIcon />,
       }, 
       {
-        // segment: 'signout',
+        segment: '',
         title: 'Sign out',
         icon: <DescriptionIcon />,
       }, 

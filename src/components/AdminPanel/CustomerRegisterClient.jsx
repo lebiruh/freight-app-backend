@@ -1,8 +1,12 @@
 import React from 'react'
+import './styles/customerRegister.css'
+import ClientRegistrationForm from './RegistrationForm/ClientRegistrationForm'
 
 const CustomerRegisterClient = () => {
-  return (
-    <div>CustomerRegisterClient</div>
+  return ( 
+      <div className="signup_container">    
+        <ClientRegistrationForm />
+      </div>
   )
 }
 

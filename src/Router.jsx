@@ -19,6 +19,7 @@ import CustomerProtectedRoute from "./components/ProtectedRoutes/CustomerProtect
 import CustomerJobDetailsPage from "./components/Customer/CustomerJobDetailsPage";
 import CustomerRegisterClient from "./components/AdminPanel/CustomerRegisterClient";
 import CustomerRegisterTruck from "./components/AdminPanel/CustomerRegisterTruck";
+import CustomerRegisterTruckOwner from "./components/AdminPanel/CustomerRegisterTruckOwner";
 
 
 const Routing = () => {
@@ -40,9 +41,10 @@ const Routing = () => {
           <Route path="orders/delivered"element={<OrdersDelivered/>} />
           <Route path="orders/cancelled"element={<OrdersCancelled/>} />
           <Route path="customers/clients"element={<CustomersClients/>} />
-          <Route path="customers/client/register"element={<CustomerRegisterClient/>} />
+          <Route path="customer/register/client"element={<CustomerRegisterClient/>} />
           <Route path="customers/team"element={<CustomersDrivers/>} />
-          <Route path="customers/truck/register"element={<CustomerRegisterTruck/>} />
+          <Route path="customer/register/truck"element={<CustomerRegisterTruck/>} />
+          <Route path="customer/register/truck-owner"element={<CustomerRegisterTruckOwner/>} />
           <Route path="reports/sales"element={<Sales/>} />
           <Route path="dispatch"element={<Dispatch/>} />
           <Route path="dispatch/:freightId"element={<Dispatch/>} />
