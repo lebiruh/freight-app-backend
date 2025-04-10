@@ -61,6 +61,31 @@ const NAVIGATION = [
     ],
   },
   {
+    kind: 'divider',
+  },
+  {
+    segment: 'admin/customers',
+    title: 'Customers',
+    icon: <ContactPageIcon />,
+    children: [
+      {
+        segment: 'clients',
+        title: 'Clients',
+        icon: <AccountBoxIcon />,
+      },      
+      {
+        segment: 'team',
+        title: 'Truck Owners',
+        icon: <AccountBoxOutlinedIcon />,
+      },      
+      {
+        segment: 'team/trucks',
+        title: 'Trucks',
+        icon: <FaTruckMoving />,
+      },      
+    ],
+  },
+  {
     segment: 'admin/customer/register',
     title: 'Register',
     icon: <HiClipboardDocumentList />,
@@ -81,27 +106,7 @@ const NAVIGATION = [
         icon: <FaTruckMoving />,
       },
     ]
-  },
-  {
-    kind: 'divider',
-  }, 
-  {
-    segment: 'admin/customers',
-    title: 'Customers',
-    icon: <ContactPageIcon />,
-    children: [
-      {
-        segment: 'clients',
-        title: 'Clients',
-        icon: <AccountBoxIcon />,
-      },      
-      {
-        segment: 'team',
-        title: 'Drivers/Truck Owners',
-        icon: <AccountBoxOutlinedIcon />,
-      },      
-    ],
-  },  
+  },    
   {
     kind: 'divider',
   },

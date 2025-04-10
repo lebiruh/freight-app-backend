@@ -1,80 +1,147 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
+import {
+  useQuery
+} from '@tanstack/react-query';
+
+import { getUsersByRole } from '../../helpers/users';
+
 
 
 
 const CustomersDrivers = () => {
 
+  // const truckOwnersQuery = useQuery({ queryKey: ['clients'], queryFn: () => getUsersByRole("client") })
+  const query = useQuery({ queryKey: ['truckOwners'], queryFn: () => getUsersByRole("truck_owner") })
+
+  const data = query?.data
+  
+  // console.log("Truck owners are: ", data);
+
+  const rows = data?.map((value,idx) => { 
+                let id = idx + 1;
+                return {...value,id};
+              })
+
+  // console.log("Rows Pending orders for admin are: ", rows);
+  
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 50 },
+  //   {
+  //     field: `owner_full_name`,
+  //     headerName: `Owner's Name`,
+  //     sortable: false,
+  //     width: 150,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: `owner_phone_no`,
+  //     headerName: `Owner's Phone No`,
+  //     sortable: false,
+  //     width: 150,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: `driver_name`,
+  //     headerName: `Driver's Name`,
+  //     sortable: false,
+  //     width: 150,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'driver_phone_no',
+  //     headerName: `Driver's Phone No`,
+  //     sortable: false,
+  //     width: 160,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'plate_no',
+  //     headerName: 'Plate No',
+  //     sortable: false,
+  //     width: 125,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'truck_type',
+  //     headerName: 'Truck Type',
+  //     width: 160,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'truck_model',
+  //     headerName: 'Truck Model',
+  //     width: 160,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'chassis_number',
+  //     headerName: 'Chassis No',
+  //     width: 160,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'engine_number',
+  //     headerName: 'Engine No',
+  //     width: 169,
+  //     // editable: true,
+  //   },
+  //   {
+  //     field: 'load_amount',
+  //     headerName: 'Load Amount',
+  //     width: 150,
+  //     // editable: true,
+  //   },    
+  //   {
+  //     field: 'region',
+  //     headerName: 'Region',
+  //     width: 150,
+  //     // editable: true,
+  //   },    
+  // ];
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'userId', headerName: 'Owner ID', width: 90 },
+    { field: 'name', headerName: 'First Name', width: 125 },
+    { field: 'last_name', headerName: 'Last Name', width: 125 },
     {
-      field: 'fullname',
-      headerName: 'Owner name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
+      field: 'phone',
+      headerName: 'Phone no',
+      // type: 'number',
+      width: 110,
+      // editable: true,
+    },
+    {
+      field: 'email',
+      headerName: 'Email Address',
+      // description: 'This column has a value getter and is not sortable.',
+      // sortable: false,
       width: 160,
       // valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
     },
     {
-      field: 'phonenumber',
-      headerName: 'Phone No',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'platenumber',
-      headerName: 'Plate No',
+      field: 'createdAt',
+      headerName: 'Member since',
       width: 150,
-      editable: true,
-    },
-    {
-      field: 'trucktype',
-      headerName: 'Truck type',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'truckmodel',
-      headerName: 'Truck model',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'chassis',
-      headerName: 'Chassis No',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'enginenumber',
-      headerName: 'Engine No',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'loadamount',
-      headerName: 'Load Amount',
-      width: 150,
-      editable: true,
-    },
-    
-  ];
+      // editable: true,
+    }
+  ]
 
-  const rows = [
-    { id: 1, fullname: 'Abebe Belew', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'SINO', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 2, fullname: 'Challa Chube', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'ISUZU', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 3, fullname: 'Belete Gude', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'ISUZU', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 4, fullname: 'Kebede Eko', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'SINO', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 5, fullname: 'Ere Belew', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'LOW BED', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 6, fullname: 'Aselchi New', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'LONG TRUCK', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 7, fullname: 'Minew Jal', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'SINO', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 8, fullname: 'Ere Tew', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'SINO', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 9, fullname: 'Minew Jal', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'ISUZU', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
-    { id: 10, fullname: 'Deg Sew', phonenumber: '09876543', platenumber: '3-AA56789', trucktype: 'HIGH BED', truckmodel: 14, chassis: 14, enginenumber: 1234, loadamount: 14 },
+  // const rows = [
+  //   { id: 1, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 2, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 3, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 4, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 5, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 6, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 7, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 8, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 9, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam' },
+  //   { id: 10, owner_full_name: 'Abebe Belew', owner_phone_no: '09876543', driver_name: 'Abebe ', driver_phone_no: '09876543', plate_no: '3-AA56789', truck_type: 'SINO', truck_model: 14, chassis_number: 14, engine_number: 1234, load_amount: 14, region: 'Gojam'},
     
-  ];
+  // ];
 
 
 
@@ -88,12 +155,12 @@ const CustomersDrivers = () => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
-        pageSizeOptions={[5]}
-        checkboxSelection
+        pageSizeOptions={[10]}
+        // checkboxSelection
         disableRowSelectionOnClick
       />
     </Box>

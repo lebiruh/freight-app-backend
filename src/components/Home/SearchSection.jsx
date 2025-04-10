@@ -36,7 +36,7 @@ const SearchSection = () => {
 
   const CustomerData = JSON.parse(localStorage.getItem('customerData'))
 
-  console.log("Customer Data is", CustomerData);
+  // console.log("Customer Data is", CustomerData);
 
   useEffect(() => {
     if(CustomerData) {
@@ -78,6 +78,7 @@ const SearchSection = () => {
       },
 
       onError: (error) => {
+        
       setServerError(true);
       setNameInputError(false);
       setPhoneInputError(false);

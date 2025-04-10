@@ -25,6 +25,14 @@ const CustomersClients = () => {
     { field: 'id', headerName: 'ID', width: 90 },
     { field: 'userId', headerName: 'Client ID', width: 90 },
     { field: 'name', headerName: 'Name', width: 90 },
+    { field: 'last_name', headerName: 'Last Name', width: 125 },
+    {
+      field: 'phone',
+      headerName: 'Phone no',
+      // type: 'number',
+      width: 110,
+      // editable: true,
+    },
     {
       field: 'email',
       headerName: 'Email Address',
@@ -32,13 +40,6 @@ const CustomersClients = () => {
       // sortable: false,
       width: 160,
       // valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-    },
-    {
-      field: 'phone',
-      headerName: 'Phone no',
-      // type: 'number',
-      width: 110,
-      // editable: true,
     },
     {
       field: 'createdAt',
@@ -62,8 +63,8 @@ const CustomersClients = () => {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
+        // checkboxSelection
+        // disableRowSelectionOnClick
       />
     </Box>
   )

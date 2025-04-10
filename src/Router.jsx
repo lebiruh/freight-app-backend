@@ -20,6 +20,7 @@ import CustomerJobDetailsPage from "./components/Customer/CustomerJobDetailsPage
 import CustomerRegisterClient from "./components/AdminPanel/CustomerRegisterClient";
 import CustomerRegisterTruck from "./components/AdminPanel/CustomerRegisterTruck";
 import CustomerRegisterTruckOwner from "./components/AdminPanel/CustomerRegisterTruckOwner";
+import CustomerTrucks from "./components/AdminPanel/CustomerTrucks";
 
 
 const Routing = () => {
@@ -43,6 +44,7 @@ const Routing = () => {
           <Route path="customers/clients"element={<CustomersClients/>} />
           <Route path="customer/register/client"element={<CustomerRegisterClient/>} />
           <Route path="customers/team"element={<CustomersDrivers/>} />
+          <Route path="customers/team/trucks"element={<CustomerTrucks/>} />
           <Route path="customer/register/truck"element={<CustomerRegisterTruck/>} />
           <Route path="customer/register/truck-owner"element={<CustomerRegisterTruckOwner/>} />
           <Route path="reports/sales"element={<Sales/>} />
