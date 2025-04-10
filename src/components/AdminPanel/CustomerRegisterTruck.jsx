@@ -11,7 +11,7 @@ import { registerTruck } from '../../helpers/Trucks';
 const CustomerRegisterTruck = () => {
 
   const [rowData, setRowData] = useState(
-    {owner_phone_no: '', driver_name: '', driver_phone_no: '', plate_no: '', truck_type: '', truck_model: '', chassis_number: '', engine_number: '', load_amount: '', region: ''}
+    {owner_phone_no: '', driver_name: '', driver_phone_no: '', plate_no: '', truck_type: '', truck_model: '', chassis_number: '', engine_number: '', load_amount: '', region: '', availability: 'true'}
   )
 
   const [ownerPhoneNoError, setOwnerPhoneNoError] = useState(false);
@@ -28,15 +28,24 @@ const CustomerRegisterTruck = () => {
 
 
   
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   const registerTruckMutation = useMutation({
       mutationFn: (rowData) => registerTruck(rowData),
 
       onSuccess: () => {
         setServerError(false);
+        setOwnerPhoneNoError(false);
+        setDriverNameError(false);
+        setDriverPhoneNoError(false);
+        setPlateError(false);
+        setTruckTypeError(false);
+        setTruckModelError(false);
+        setChassisError(false);
+        setEngineError(false);
+        setLoadError(false);
         alert('Truck successfully registered!')
-        queryClient.invalidateQueries({queryKey: ['trucks']})
+        // queryClient.invalidateQueries({queryKey: ['trucks']})
       },
 
       onError: (error) => {
@@ -254,7 +263,7 @@ const CustomerRegisterTruck = () => {
   ];
 
   const rows = [
-    {id: 1, owner_phone_no: rowData.owner_phone_no, driver_name: rowData.driver_name, driver_phone_no: rowData.driver_phone_no, plate_no: rowData.plate_no , truck_type: rowData.truck_type, truck_model: rowData.truck_model, chassis_number: rowData.chassis_number, engine_number: rowData.engine_number, load_amount: rowData.load_amount, region: rowData.region}
+    {id: 1, owner_phone_no: rowData.owner_phone_no, driver_name: rowData.driver_name, driver_phone_no: rowData.driver_phone_no, plate_no: rowData.plate_no , truck_type: rowData.truck_type, truck_model: rowData.truck_model, chassis_number: rowData.chassis_number, engine_number: rowData.engine_number, load_amount: rowData.load_amount, region: rowData.region, availability: true}
   ]
 
 

@@ -12,7 +12,7 @@ const CustomerTrucks = () => {
   
   const data = query?.data
   
-  console.log("Pending orders for admin are: ", data);
+  // console.log("Trucks for admin are: ", data);
 
   const rows = data?.map((value,idx) => { 
                 let id = idx + 1;
@@ -45,7 +45,7 @@ const CustomerTrucks = () => {
       // editable: true,
     },
     {
-      field: 'plate_no',
+      field: 'license_plate',
       headerName: 'Plate No',
       sortable: false,
       width: 125,

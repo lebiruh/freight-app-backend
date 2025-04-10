@@ -15,7 +15,7 @@ export const registerTruck = async (rowData) => {
     const response = await axios.post(`${baseURL}/api/register/truck`, rowData);
 
     const posts = response.data;
-
+    console.log("response on register teuck is: ", posts);
     return posts;
 
   } catch (error) {
