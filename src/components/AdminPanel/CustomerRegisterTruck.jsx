@@ -24,6 +24,7 @@ const CustomerRegisterTruck = () => {
   const [engineError, setEngineError] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [serverError, setServerError] = useState(false);
+  const [phoneFormatError, setPhoneFormatError] = useState(false);
 
 
 
@@ -44,6 +45,7 @@ const CustomerRegisterTruck = () => {
         setChassisError(false);
         setEngineError(false);
         setLoadError(false);
+        setPhoneFormatError(false);
         alert('Truck successfully registered!')
         // queryClient.invalidateQueries({queryKey: ['trucks']})
       },
@@ -59,12 +61,15 @@ const CustomerRegisterTruck = () => {
       setChassisError(false);
       setEngineError(false);
       setLoadError(false);
+      setPhoneFormatError(false);
     }
     })
 
     const handleTruckRegistration = async (e) => {
 
     e.preventDefault();
+
+    const phoneRegex = /^[0-9]+$/;
 
     if (rowData.owner_phone_no === "") {
       setServerError(false);
@@ -76,7 +81,22 @@ const CustomerRegisterTruck = () => {
       setChassisError(false);
       setEngineError(false);
       setLoadError(false);
+      setPhoneFormatError(false);
       setOwnerPhoneNoError(true);
+      return;
+    }
+    if (!phoneRegex.test(rowData.owner_phone_no)) {
+      setServerError(false);
+      setOwnerPhoneNoError(false);
+      setDriverNameError(false);
+      setPlateError(false);
+      setTruckTypeError(false);
+      setTruckModelError(false);
+      setChassisError(false);
+      setEngineError(false);
+      setLoadError(false);
+      setDriverPhoneNoError(false); 
+      setPhoneFormatError(true);
       return;
     }
     if (rowData.driver_name === "") {
@@ -89,6 +109,7 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setDriverNameError(true);
       return;
     }
@@ -102,7 +123,23 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setDriverPhoneNoError(true);
+      return;
+    }
+    
+    if (!phoneRegex.test(rowData.driver_phone_no)) {
+      setServerError(false);
+      setOwnerPhoneNoError(false);
+      setDriverNameError(false);
+      setPlateError(false);
+      setTruckTypeError(false);
+      setTruckModelError(false);
+      setChassisError(false);
+      setEngineError(false);
+      setLoadError(false);
+      setDriverPhoneNoError(false); 
+      setPhoneFormatError(true);
       return;
     }
     if (rowData.plate_no === "") {
@@ -115,6 +152,7 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setPlateError(true);
       return;
     }
@@ -128,6 +166,7 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setTruckTypeError(true);
       return;
     }
@@ -141,6 +180,7 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setTruckModelError(true);
       return;
     }
@@ -154,6 +194,7 @@ const CustomerRegisterTruck = () => {
       setEngineError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setChassisError(true);
       return;
     }
@@ -167,6 +208,7 @@ const CustomerRegisterTruck = () => {
       setChassisError(false);
       setLoadError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setEngineError(true);
       return;
     }
@@ -180,6 +222,7 @@ const CustomerRegisterTruck = () => {
       setChassisError(false);
       setEngineError(false);
       setOwnerPhoneNoError(false);
+      setPhoneFormatError(false);
       setLoadError(true);
       return;
     }
@@ -251,6 +294,7 @@ const CustomerRegisterTruck = () => {
     {
       field: 'load_amount',
       headerName: 'Load Amount',
+      type: 'number',
       width: 150,
       editable: true,
     },    
@@ -304,10 +348,11 @@ const CustomerRegisterTruck = () => {
         {chassisError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Chassis. All fields are required. Please fill in all the fields. </div>}
         {engineError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Engine. All fields are required. Please fill in all the fields. </div>}
         {loadError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Load. All fields are required. Please fill in all the fields. </div>}
-        <div className="signup_btn_container" style={{width: '200px'}}>
+        {phoneFormatError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter a valid phone number (only digits). </div>}
         {serverError && <div style={{color: "red", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> {registerTruckMutation.error?.message} </div>}
+        <div className="signup_btn_container" style={{width: '200px'}}>        
           <button className="signup_btn" type='submit'>Register Truck</button>
-      </div>
+        </div>
       </form>      
     </>
   )

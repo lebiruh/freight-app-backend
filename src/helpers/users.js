@@ -9,13 +9,13 @@ export const registerClient = async (registrationData) => {
 
     const response = await axios.post(`${baseURL}/api/auth/client/register`, registrationData);
 
-    return response.data;
+    return response?.data;
 
   } catch (error) {
     console.log(error);
-    const errorData = error.response.data;
+    const errorData = error?.response?.data;
     // console.log(errorData);
-    throw new Error(errorData.message || 'Client registration failed.');
+    throw new Error(errorData?.message || 'Client registration failed.');
   }
   
 }
@@ -26,13 +26,13 @@ export const registerTruckOwner = async (registrationData) => {
 
     const response = await axios.post(`${baseURL}/api/auth/truck-owner/register`, registrationData);
 
-    return response.data;
+    return response?.data;
 
   } catch (error) {
     console.log(error);
-    const errorData = error.response.data;
+    const errorData = error?.response?.data;
     // console.log(errorData);
-    throw new Error(errorData.message || 'Truck owner registration failed.');
+    throw new Error(errorData?.message || 'Truck owner registration failed.');
   }
   
 }

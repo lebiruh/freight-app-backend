@@ -14,13 +14,13 @@ export const registerTruck = async (rowData) => {
 
     const response = await axios.post(`${baseURL}/api/register/truck`, rowData);
 
-    const posts = response.data;
-    console.log("response on register teuck is: ", posts);
+    const posts = response?.data;
+    console.log("response on register truck is: ", posts);
     return posts;
 
   } catch (error) {
     console.log(error);
-    const errorData = error.response.data;
+    const errorData = error?.response?.data;
     throw new Error(errorData.message || 'Freight submission failed.');
   }
 
@@ -35,14 +35,35 @@ export const getAllTrucks = async () => {
   try {
     const response = await axios.get(`${baseURL}/api/trucks/all`);
 
-    const posts = response.data;
+    const posts = response?.data;
     // console.log("All pending order on helper is: ");
     return posts;
 
   } catch (error) {
     console.log(error);
-    const errorData = error.response.data;
-    throw new Error(errorData.message || 'Fetching trucks failed.');
+    const errorData = error?.response?.data;
+    throw new Error(errorData?.message || 'Fetching trucks failed.');
+  }
+
+};
+
+export const getTrucksByTruckType = async (truckType) => {
+
+  // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
+
+  // const token = userData?.token
+
+  try {
+    const response = await axios.get(`${baseURL}/api/available/trucks/${truckType}`);
+
+    const trucks = response?.data;
+    console.log("All pending order on helper is: trucks");
+    return trucks;
+
+  } catch (error) {
+    console.log(error);
+    const errorData = error?.response?.data;
+    throw new Error(errorData?.message || 'Fetching trucks failed.');
   }
 
 };

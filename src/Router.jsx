@@ -11,7 +11,7 @@ import CustomerAboutPage from "./components/Customer/CustomerAboutPage";
 import CustomerContactPage from "./components/Customer/CustomerContactPage";
 import { Routes, Route } from "react-router";
 import CustomerPage from "./pages/CustomerPage";
-import Dispatch from "./components/AdminPanel/Dispatch";
+import Dispatch from "./components/AdminPanel/Dispatch/Dispatch";
 import CustomerFreightRequestPage from "./components/Customer/CustomerFreighRequestPage";
 import OrdersDelivered from "./components/AdminPanel/OrdersDelivered";
 import CustomerLoginPage from "./pages/CustomerLoginPage/CustomerLoginPage";
