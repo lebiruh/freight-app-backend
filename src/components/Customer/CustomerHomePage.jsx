@@ -74,7 +74,7 @@ const CustomerHomePage = () => {
     }, 300)
   },[searchQuery])
 
-  console.log("allJobs on home page is: ", searchQuery);
+  // console.log("allJobs on home page is: ", searchQuery);
   // console.log("debouncedQuery on home page is: ", debouncedQuery);
 
 

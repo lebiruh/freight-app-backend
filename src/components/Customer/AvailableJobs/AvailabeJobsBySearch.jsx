@@ -26,7 +26,7 @@ const AvailabeJobsBySearch = ({debouncedQuery, handleJobClick}) => {
   //     }, 300)
   //   },[searchQuery])
 
-  const searchResults = useQuery({queryKey:['searchResults'], 
+  const searchResults = useQuery({queryKey:['searchResults', debouncedQuery], 
       queryFn: () => getPendingOrdersBySearch(debouncedQuery), 
       enabled: !!debouncedQuery,
       // staleTime: 1000 * 60 * 5,
@@ -35,7 +35,7 @@ const AvailabeJobsBySearch = ({debouncedQuery, handleJobClick}) => {
       }
     })
 
-  console.log("searchResults on available jobs is: ", searchResults.data);
+  // console.log("searchResults on available jobs is: ", searchResults.data);
 
 
   if (searchResults?.isLoading) {
