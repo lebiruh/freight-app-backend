@@ -19,7 +19,7 @@ import {
 } from '@tanstack/react-query';
 import { IoMdSearch } from "react-icons/io";
 
-import {getPendingOrders} from '../../helpers/Orders'
+import {getOrders} from '../../helpers/Orders'
 
 
 import AllAvailableJobs from './AvailableJobs/AllAvailableJobs';
@@ -36,7 +36,7 @@ const CustomerHomePage = () => {
 
 
   // Available Freight Job Queries
-  const allJobs = useQuery({ queryKey: ['pending'], queryFn: () => getPendingOrders() })
+  const allJobs = useQuery({ queryKey: ['pending'], queryFn: () => getOrders('pending') })
 
   // console.log("Pending orders are: ", allJobs?.data);
 

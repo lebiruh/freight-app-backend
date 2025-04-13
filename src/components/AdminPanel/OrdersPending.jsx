@@ -7,13 +7,15 @@ import { Link } from "react-router";
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
-import {getPendingOrders} from '../../helpers/Orders'
+import {getOrders} from '../../helpers/Orders'
 
 
 
 const OrdersPending = () => {
 
-  const query = useQuery({ queryKey: ['pending'], queryFn: () => getPendingOrders() })
+  // const jobStatus = {status: 'pending'}
+
+  const query = useQuery({ queryKey: ['pending'], queryFn: () => getOrders('pending') })
 
   const data = query?.data
   

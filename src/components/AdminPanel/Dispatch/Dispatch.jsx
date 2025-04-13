@@ -24,7 +24,7 @@ import { ImSpinner6 } from "react-icons/im";
 
 const Dispatch = () => {
 
-  // const [serverError, setServerError] = useState(false);
+  // const [serverError, setServerError] = useState(false); 
 
   const { freightId } = useParams();
   // const navigate = useNavigate();
@@ -53,11 +53,7 @@ const Dispatch = () => {
         console.error("Error fetching trucks:", error);
         // setServerError(true);
       } // Only run the query if truckType is available
-    });
-
-  const handleButtonClick = () => {
-
-  }
+    });  
   
 
   if (isLoading) {
@@ -157,7 +153,7 @@ const Dispatch = () => {
         }        
         {truckByType.isError && <div style={{color: "red", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}><CgDanger /> {truckByType?.error?.message}</div>}
         {
-          truckByType?.data?.map((data, idx) => <AvailablerTrucksForDispatch truckByType={data} key={idx} handleButtonClick={handleButtonClick}/>)
+          truckByType?.data?.map((data, idx) => <AvailablerTrucksForDispatch truckByType={data} freightId={jobId} key={idx}/>)
         }
         
       </div>

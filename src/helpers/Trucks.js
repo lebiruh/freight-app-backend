@@ -57,8 +57,29 @@ export const getTrucksByTruckType = async (truckType) => {
     const response = await axios.get(`${baseURL}/api/available/trucks/${truckType}`);
 
     const trucks = response?.data;
-    console.log("All pending order on helper is: trucks");
+    // console.log("All pending order on helper is: trucks");
     return trucks;
+
+  } catch (error) {
+    console.log(error);
+    const errorData = error?.response?.data;
+    throw new Error(errorData?.message || 'Fetching trucks failed.');
+  }
+
+};
+
+export const upDateTruckAvailability = async (truckId) => {
+
+  // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
+
+  // const token = userData?.token
+
+  try {
+    const response = await axios.patch(`${baseURL}/api/update/availability/truck/${truckId}`);
+
+    const posts = response?.data;
+    // console.log("All pending order on helper is: ");
+    return posts;
 
   } catch (error) {
     console.log(error);

@@ -5,10 +5,12 @@ const TruckTypeSelect = ({handleTruckChange}) => {
 
 
   const options = [
+    { value: 'TRAILER', label: 'TRAILER' },
     { value: 'SINO', label: 'SINO' },
     { value: 'ISUZU', label: 'ISUZU' },
     { value: 'HIGHBED', label: 'HIGHBED' },
-    { value: 'LOWBED', label: 'LOWBED' }
+    { value: 'LOWBED', label: 'LOWBED' },
+    
   ]
 
   const customStyles = {

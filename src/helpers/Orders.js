@@ -26,14 +26,14 @@ export const addOrder = async (order) => {
 
 };
 
-export const getPendingOrders = async () => {
+export const getOrders = async (status) => {
 
   // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
 
   // const token = userData?.token
 
   try {
-    const response = await axios.get(`${baseURL}/api/orders/pending`);
+    const response = await axios.get(`${baseURL}/api/orders/${status}`);
 
     const posts = response.data;
     // console.log("All pending order on helper is: ");
@@ -91,6 +91,29 @@ export const getPendingOrdersBySearch = async (searchQuery) => {
     console.log(error);
     const errorData = error.response.data;
     throw new Error(errorData.message || 'Fetching pending orders failed.');
+  }
+
+};
+
+export const upDateOrderByStatus = async (status) => {
+
+  // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
+
+  // const token = userData?.token
+
+  console.log('Object on update order is: ', status);
+
+  try {
+    const response = await axios.patch(`${baseURL}/api/status/update-status`, status);
+
+    const posts = response?.data;
+    // console.log("All pending order on helper is: ");
+    return posts;
+
+  } catch (error) {
+    console.log(error);
+    const errorData = error?.response?.data;
+    throw new Error(errorData?.message || 'Fetching trucks failed.');
   }
 
 };
