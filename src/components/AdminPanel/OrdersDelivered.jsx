@@ -2,10 +2,11 @@ import {
   useQuery
 } from '@tanstack/react-query';
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
 import {getOrders} from '../../helpers/Orders'
+import { grey } from '@mui/material/colors';
 
 
 const OrdersAvailable = () => {
@@ -95,25 +96,7 @@ const OrdersAvailable = () => {
       headerName: 'Status',
       width: 100,
       // editable: true,
-    },
-    {
-      field: 'assign',
-      headerName: 'Action',
-      width: 150,
-      // height: 50,
-      renderCell: (params) => {
-        return (
-          <button 
-            style={{width: '100%', height: '70%', cursor: 'pointer', marginTop:'10px', marginBottom: 'auto',  backgroundColor: 'skyblue', textAlign: 'center', borderRadius: '5px', paddingTop: '0', color: 'white'}
-              } 
-            onClick={() => console.log('action button clicked!')}
-          >
-            Mark as Delivered 
-          </button>
-        );
-      },
-    },
-    
+    }    
   ];
 
 
@@ -133,6 +116,15 @@ const OrdersAvailable = () => {
         pageSizeOptions={[5]}
         // checkboxSelection
         disableRowSelectionOnClick
+        getRowSpacing={params => ({
+          top: params.isFirstVisible ? 0 : 5,
+          bottom: params.isLastVisible ? 0 : 5
+        })}
+        sx={{
+          [`& .${gridClasses.row}`] : {
+            bgcolor: theme => theme.palette.mode === 'light' ? grey[200] : grey[900]
+          }
+        }}
       />
     </Box>
   )

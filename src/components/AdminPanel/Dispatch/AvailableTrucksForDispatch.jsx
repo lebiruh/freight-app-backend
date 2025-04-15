@@ -13,10 +13,13 @@ import { useNavigate } from "react-router";
 import {actions} from "../../Actions/actions"
 import { upDateOrderByStatus } from '../../../helpers/Orders';
 
-const AvailablerTrucksForDispatch = ({truckByType, freightId}) => {
+const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
 
 
   console.log("truckByType is: ", truckByType);
+  console.log("clientId is: ", clientId);
+
+  
   const active = actions.active
 
   const truckId = truckByType?.truckId
@@ -28,7 +31,7 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId}) => {
   const updateTruckandOrderAvailability = useMutation({
     mutationFn: async (data) => {
       await upDateTruckAvailability(data.truckId)
-      await upDateOrderByStatus({action: data.active, id: data.freightId})
+      await upDateOrderByStatus({action: data.active, id: data.freightId, truckId: data.truckId})
     },
 
     onSuccess: () => {
@@ -54,11 +57,20 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId}) => {
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
+                  Plate No:
+              </Typography>
+              <Typography>
+                  {/* You can add more specific details here based on your job object */}
+                  {`${truckByType.license_plate}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
                   Owner Name:
               </Typography>
               <Typography>
                   {/* You can add more specific details here based on your job object */}
-                  {`${truckByType.name} ${truckByType.last_name}`}
+                  {`${truckByType.owner_name} ${truckByType.owner_lastname}`}
               </Typography>
             </Grid>
             <Grid item xs={4}>
@@ -67,10 +79,10 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId}) => {
               </Typography>
               <Typography>
                   {/* You can add more specific details here based on your job object */}
-                  {`${truckByType.phone}`}
+                  {`${truckByType.owner_phone}`}
               </Typography>
             </Grid>
-            <Grid item xs={4} style={{display: "flex", alignItems: 'center'}}>
+            <Grid item xs={4} style={{display: "flex", alignItems: 'center', padding: '8px'}}>
               <div to='#' style={{border: 'none', borderRadius:'5px', padding: '2px', backgroundColor: '#3bb077', width: '180px', height: '30px', color: 'white'}}>
                 <button style={{width: '90%', height: '90%', cursor: 'pointer'}} onClick={handleButtonClick}>
                   {

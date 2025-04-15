@@ -7,7 +7,7 @@ import {
     Divider,
 } from '@mui/material';
 import { useParams } from 'react-router';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // Assuming you have a function to fetch a single job by ID
 import { useQuery } from '@tanstack/react-query';
@@ -17,10 +17,9 @@ import Grid from '@mui/material/Grid';
 
 
 import {useTranslation} from "react-i18next"
-import AvailablerTrucksForDispatch from './AvailableTrucksForDispatch';
+import AvailableTrucksForDispatch from './AvailableTrucksForDispatch';
 import { getTrucksByTruckType } from '../../../helpers/Trucks';
 import { CgDanger } from "react-icons/cg";
-import { ImSpinner6 } from "react-icons/im";
 
 const Dispatch = () => {
 
@@ -44,6 +43,8 @@ const Dispatch = () => {
   const truckType = !isLoading && job && job[0]?.type
 
   const jobId = freightId
+
+  const clientId = !isLoading && job && job[0]?.clientId
 
   const truckByType = useQuery({
       queryKey: ['available', jobId], // Include truckType in the query key for unique fetching
@@ -149,11 +150,11 @@ const Dispatch = () => {
         }}
       >
         {
-          truckByType.isLoading && <div style={{color: "blue", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}><ImSpinner6 /> Fetching Trucks...</div>
+          truckByType.isLoading && <div style={{color: "blue", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}><CircularProgress size={16}/> Fetching Trucks...</div>
         }        
         {truckByType.isError && <div style={{color: "red", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}><CgDanger /> {truckByType?.error?.message}</div>}
         {
-          truckByType?.data?.map((data, idx) => <AvailablerTrucksForDispatch truckByType={data} freightId={jobId} key={idx}/>)
+          truckByType?.data?.map((data, idx) => <AvailableTrucksForDispatch truckByType={data} freightId={jobId} clientId={clientId} key={idx}/>)
         }
         
       </div>

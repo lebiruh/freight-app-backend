@@ -11,6 +11,9 @@ import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCa
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import StatCard from './StatCard';
+import { useQuery } from '@tanstack/react-query';
+import { getOrders } from '../../helpers/Orders';
+import { getUsersByRole } from '../../helpers/users';
 
 // import HighlightedCard from '../components/HiglightedCard';
 // import SessionsChart from '../components/SessionsChart';
@@ -18,22 +21,40 @@ import StatCard from './StatCard';
 // import CustomTreeView from '../components/CustomTreeView';
 // import ChartUserByCountry from '../components/ChartUserByCountry';
 
-const data = [
+
+
+function DashboardContent() {
+
+  const pendingOrders = useQuery({ queryKey: ['pending'], queryFn: () => getOrders('pending') })
+  const activeOrders = useQuery({ queryKey: ['in_transit'], queryFn: () => getOrders('in_transit') })
+  const deliveredOrders = useQuery({ queryKey: ['completed'], queryFn: () => getOrders('completed') })
+  const clients = useQuery({ queryKey: ['clients'], queryFn: () => getUsersByRole("client") })
+  const truckOwners = useQuery({ queryKey: ['truckOwners'], queryFn: () => getUsersByRole("truck_owner") })
+
+  const numberOfPendingOrders = !pendingOrders.isLoading && pendingOrders && pendingOrders?.data.length
+  const numberOfActiveOrders = !activeOrders.isLoading && activeOrders && activeOrders?.data.length
+  const numberOfDeliveredOrders = !deliveredOrders.isLoading && deliveredOrders && deliveredOrders?.data.length
+  const numberOfClients = !clients.isLoading && clients && pendingOrders?.data.length
+  const numberOfTruckOwners = !truckOwners.isLoading && truckOwners && truckOwners?.data.length
+
+  console.log('Pending Dashboard: ', activeOrders);
+
+  const data = [
   {
     title: 'Pending Orders',
-    value: '14k',
+    value: numberOfPendingOrders,
     color: 'rgb(243, 213, 158)',
     icon: <AddShoppingCartIcon sx={{color: "orange", height: 40, width: 40}}/>,
   },
   {
     title: 'Active Orders',
-    value: '325',
+    value: numberOfActiveOrders,
     color: 'rgb(244, 216, 244)',
     icon: <ShoppingCartIcon sx={{color: "purple", height: 40, width: 40}}/>,
   },
   {
     title: 'Delivered Orders',
-    value: '200k',
+    value: numberOfDeliveredOrders,
     color: 'rgb(183, 247, 183)',
     icon: <CardGiftcardIcon sx={{color: "green", height: 40, width: 40}}/>,
   },
@@ -45,19 +66,18 @@ const data = [
   },
   {
     title: 'Clients',
-    value: '200',
+    value: numberOfClients,
     color: '#D5E8FC',
     icon: <AccountBoxIcon sx={{color: "#0F7BE6", height: 40, width: 40}}/>,
   },
   {
     title: 'Drivers/Car Owners',
-    value: '200',
+    value: numberOfTruckOwners,
     color: '#B0CAE6',
     icon: <AccountBoxOutlinedIcon sx={{color: "#0D5DAE", height: 40, width: 40}}/>,
   },
 ];
 
-function DashboardContent() {
   return (
     <Box sx={{ display: 'flex' }}>
       <Box

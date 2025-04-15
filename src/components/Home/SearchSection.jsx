@@ -52,7 +52,7 @@ const SearchSection = () => {
 
   const clearOrder = () => {
     setOrder({
-      userId:'', name: '', phone: '', truck: '', weight: '', weightUnit:'', status: 'pending', source: '', destination: '', price: '', priceUnit: ''
+      userId: CustomerData?.userId, name: '', phone: '', truck: '', weight: '', weightUnit:'', status: 'pending', source: '', destination: '', price: '', priceUnit: ''
     })
   }
 

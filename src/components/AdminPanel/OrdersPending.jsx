@@ -4,10 +4,13 @@ import {
 
 import { Link } from "react-router";
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
+import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+
 import {getOrders} from '../../helpers/Orders'
+import { grey } from '@mui/material/colors';
 
 
 
@@ -29,7 +32,7 @@ const OrdersPending = () => {
   // console.log("Rows Pending orders for admin are: ", rows);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'id', headerName: 'ID', width: 50, hide: 'true' },
     { field: 'clientId', headerName: 'Client ID', width: 90 },
     { field: 'freightId', headerName: 'Freight ID', width: 90 },
     {
@@ -93,11 +96,13 @@ const OrdersPending = () => {
       field: 'assign',
       headerName: 'Action',
       width: 100,
+      type: 'actions',
       renderCell: (params) => {
+        // style={{border: 'none', borderRadius:'5px', padding: '2px', backgroundColor: '#3bb077', width: '180px', height: '80px', color: 'white'}}
         return (
           <>            
-            <Link to={`/admin/dispatch/${params.row?.freightId}`} style={{border: 'none', borderRadius:'5px', padding: '2px', backgroundColor: '#3bb077', width: '180px', height: '80px', color: 'white'}}>
-              <button style={{width: '90%', height: '90%', cursor: 'pointer'}}>Assign</button>
+            <Link to={`/admin/dispatch/${params.row?.freightId}`} >
+              <DirectionsCarFilledIcon sx={{ cursor: 'pointer'}} color="primary"/>
             </Link>            
           </>
         );
@@ -130,8 +135,17 @@ const OrdersPending = () => {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
         disableRowSelectionOnClick
+        getRowSpacing={params => ({
+          top: params.isFirstVisible ? 0 : 5,
+          bottom: params.isLastVisible ? 0 : 5
+        })}
+        sx={{
+          [`& .${gridClasses.row}`] : {
+            bgcolor: theme => theme.palette.mode === 'light' ? grey[200] : grey[900]
+          }
+        }}
       />
     </Box>
   )

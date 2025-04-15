@@ -4,13 +4,15 @@ import {
   useQueryClient
 } from '@tanstack/react-query';
 
-import { DataGrid } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import {Box, IconButton} from '@mui/material';
 
 import {getOrders, upDateOrderByStatus} from '../../helpers/Orders'
 import {actions} from "../Actions/actions"
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
-import { upDateTruckAvailability } from '../../helpers/Trucks';
+// import { upDateTruckAvailability } from '../../helpers/Trucks';
+import { grey } from '@mui/material/colors';
 
 const OrdersActive = () => {
 
@@ -24,6 +26,8 @@ const OrdersActive = () => {
 
   const completed = actions.completed
 
+  // const truckId = 
+
   // const freightId = activeOrders?.freightId
 
   // const dataForbackEnd = { completed: completed, freightId: freightId}
@@ -31,19 +35,19 @@ const OrdersActive = () => {
   const updateTruckandOrderAvailability = useMutation({
     mutationFn: (data) => {
       // await upDateTruckAvailability(data.truckId)
-      upDateOrderByStatus({action: data.completed, id: data.freightId})
+      upDateOrderByStatus({action: data.completed, id: data.freightId, truckId: data.truckId})
     },
 
     onSuccess: () => {
+      alert('Freight successfully marked as delivered!')
       queryClient.invalidateQueries({queryKey: ['in_transit']})
       queryClient.invalidateQueries({queryKey: ['completed']})
-      alert('Freight successfully marked as delivered!')
       // navigate(`/admin/orders/pending`);
     },
   })
 
-  const handleButtonClick = (freightId) => {
-    updateTruckandOrderAvailability.mutate({ completed: completed, freightId: freightId});
+  const handleButtonClick = (freightId, truckId) => {
+    updateTruckandOrderAvailability.mutate({ completed: completed, freightId: freightId, truckId: truckId});
   }
 
   const rows = activeOrders?.map((value,idx) => { 
@@ -127,18 +131,15 @@ const OrdersActive = () => {
     },
     {
       field: 'assign',
-      headerName: 'Action',
+      headerName: 'Mark as Delivered',
       width: 150,
+      type: 'actions',
       // height: 50,
       renderCell: (params) => {
         return (
-          <button 
-            style={{width: '100%', height: '70%', cursor: 'pointer', marginTop:'10px', marginBottom: 'auto',  backgroundColor: 'skyblue', textAlign: 'center', borderRadius: '5px', paddingTop: '0', color: 'white'}
-              } 
-            onClick={() => handleButtonClick(params.row.freightId)}
-          >
-            Mark as Delivered 
-          </button>
+          <IconButton sx={{m:1}} onClick={() => handleButtonClick(params.row.freightId, params.row.truckId)}>
+            <DoneAllIcon color='primary'/>
+          </IconButton>
         );
       },
     },
@@ -161,6 +162,15 @@ const OrdersActive = () => {
         pageSizeOptions={[5]}
         // checkboxSelection
         disableRowSelectionOnClick
+        getRowSpacing={params => ({
+          top: params.isFirstVisible ? 0 : 5,
+          bottom: params.isLastVisible ? 0 : 5
+        })}
+        sx={{
+          [`& .${gridClasses.row}`] : {
+            bgcolor: theme => theme.palette.mode === 'light' ? grey[200] : grey[900]
+          }
+        }}
       />
     </Box>
   )
