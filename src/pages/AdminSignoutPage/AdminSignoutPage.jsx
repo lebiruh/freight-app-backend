@@ -16,7 +16,7 @@ const CustomerSignout = () => {
       // addOrderMutation.mutate(order);
       // clearOrder();
       localStorage.removeItem('adminEditorData');
-      navigate('/admin');
+      navigate('/');
     }
 
     const handleCancelClick = () => {
