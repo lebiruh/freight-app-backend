@@ -3,13 +3,13 @@ import { useNavigate } from "react-router";
 import {useMutation} from "@tanstack/react-query"
 // import { login } from "../../helpers/login";
 // import {AuthProvider} from "../../Context/AuthContext/AuthContext"
-import "./customerLoginForm.css"
+import "./editorLoginForm.css"
 // import { useAuth } from "../../helpers/useAuth";
 
 import { CgDanger } from "react-icons/cg";
-import { UserLogin } from "../../../helpers/Login";
+import { EditorLogin } from "../../../helpers/Login";
 
-const CustomerLoginForm = () => {
+const EditorLoginForm = () => {
 
   const [loginData, setLoginData] = useState({phone: "", password: ""})
   const [phoneError, setPhoneError] = useState(false);
@@ -22,12 +22,12 @@ const CustomerLoginForm = () => {
 
   const mutation = useMutation({
 
-    mutationFn: UserLogin,
+    mutationFn: EditorLogin,
 
     onSuccess: (data) => {
 
       // setAuthData(data);
-      localStorage.setItem('customerData', JSON.stringify(data));
+      localStorage.setItem('adminEditorData', JSON.stringify(data));
 
       setServerError(false);
       setPhoneError(false);
@@ -35,7 +35,7 @@ const CustomerLoginForm = () => {
 
       // setAuthData(JSON.parse(localStorage.getItem('customerData')));
 
-      navigate("/user/order-freight")
+      navigate("/admin")
 
     },
     onError: (error) => {
@@ -74,12 +74,12 @@ const CustomerLoginForm = () => {
     <section className="login_form_container">
       <div className="login_form_header_content">
         <h1>Sign in</h1>
-        <p>Sign in to order a freight.</p>
+        <p>Hello, Please sign in.</p>
       </div>
       <form onSubmit={handleLogin} className="loginForm_container">
         {serverError && <div style={{color: "red", fontSize: "14px", fontWeight:"400", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> {mutation.error?.message} </div>}
         <div className="email_input">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="phone">Phone</label>
           <input type="phone" id="phone" name="phone" placeholder="Phone" value={loginData.phone} onChange={handleChange}/>
           {phoneError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter your phone number. </div>}
         </div>
@@ -96,12 +96,12 @@ const CustomerLoginForm = () => {
             {mutation.isPending ? "Signing in..." : "Sign in" }
           </button>
         </div>
-        <div className="separator">
+        {/* <div className="separator">
           By clicking Continue, you agree to FreightApp&apos;s <a href="#" >User Agreement</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookie Policy</a>
-        </div>
+        </div> */}
       </form>
     </section>
   )
 }
 
-export default CustomerLoginForm
+export default EditorLoginForm

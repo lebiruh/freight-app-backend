@@ -11,6 +11,9 @@ import { IoCaretDownOutline } from "react-icons/io5";
 import {useTranslation} from "react-i18next"
 import "../../i18n"
 
+// import LoginIcon from '@mui/icons-material/Login';
+import { LoginOutlined } from '@mui/icons-material';
+
 
 
 function classNames(...classes) {
@@ -29,6 +32,9 @@ const Navbar = () => {
 
   const pathName = location.pathname.split('/')[1];
 
+  const AdminEditorData = JSON.parse(localStorage.getItem('adminEditorData'))
+  const customerData = JSON.parse(localStorage.getItem('customerData'))
+
 
   const navigation = [
   { name: t("home.home"), href: '/'},
@@ -46,9 +52,9 @@ const Navbar = () => {
   //       ));
   //     };
 
-    useEffect(() => {
+    // useEffect(() => {
         // setLoading(false);
-    }, []);
+    // }, []);
 
     
     // console.log(navigation);
@@ -146,6 +152,7 @@ const Navbar = () => {
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     className="size-8 rounded-full"
                   /> */}
+                  {/* <div style={{backgroundColor: 'white'}}><LoginOutlined /></div> */}
                   <span className=''>{t("language.select")}</span>
                   <IoCaretDownOutline />
                 </MenuButton>
@@ -181,41 +188,62 @@ const Navbar = () => {
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
+                  {/* <img
                     alt=""
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     className="size-8 rounded-full"
-                  />
+                  /> */}
+                  {/* <div style={{backgroundColor: 'white', width:'15px', height:'15px', borderRadius: '5px'}}> */}
+                    <LoginOutlined color='primary' size="40px"/>
+                  {/* </div> */}
+                  
                 </MenuButton>
               </div>
               <MenuItems
                 transition
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-              >
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Settings
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </a>
-                </MenuItem>
+              >                
+                {
+                  !customerData ? (
+                    <MenuItem>
+                      <a
+                        href="/user/order-freight"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        User
+                      </a>
+                    </MenuItem>
+                    ) : ''
+                }                
+                
+                
+                {
+                  !AdminEditorData ? (
+                    <MenuItem>
+                    <a
+                      href="/admin"
+                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    >
+                      Admin
+                    </a>
+                    </MenuItem>
+                  ) : ''
+                  
+                }
+                  
+                {
+                  customerData ? (
+                    <MenuItem>
+                      <a
+                        href="/user/signout"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        Sign out
+                      </a>
+                    </MenuItem>
+                      ) : ''
+                }
+                
               </MenuItems>
             </Menu>
             {/* Profile dropdown end*/}

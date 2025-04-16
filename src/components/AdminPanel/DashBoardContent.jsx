@@ -15,6 +15,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getOrders } from '../../helpers/Orders';
 import { getUsersByRole } from '../../helpers/users';
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 // import HighlightedCard from '../components/HiglightedCard';
 // import SessionsChart from '../components/SessionsChart';
 // import PageViewsBarChart from '../components/PageViewsBarChart';
@@ -34,27 +36,27 @@ function DashboardContent() {
   const numberOfPendingOrders = !pendingOrders.isLoading && pendingOrders && pendingOrders?.data.length
   const numberOfActiveOrders = !activeOrders.isLoading && activeOrders && activeOrders?.data.length
   const numberOfDeliveredOrders = !deliveredOrders.isLoading && deliveredOrders && deliveredOrders?.data.length
-  const numberOfClients = !clients.isLoading && clients && pendingOrders?.data.length
+  const numberOfClients = !clients.isLoading && clients && clients?.data.length
   const numberOfTruckOwners = !truckOwners.isLoading && truckOwners && truckOwners?.data.length
 
-  console.log('Pending Dashboard: ', activeOrders);
+  // console.log('Pending Dashboard: ', activeOrders);
 
   const data = [
   {
     title: 'Pending Orders',
-    value: numberOfPendingOrders,
+    value: pendingOrders.isLoading ? <CircularProgress size="30px"/> : numberOfPendingOrders,
     color: 'rgb(243, 213, 158)',
     icon: <AddShoppingCartIcon sx={{color: "orange", height: 40, width: 40}}/>,
   },
   {
     title: 'Active Orders',
-    value: numberOfActiveOrders,
+    value: activeOrders.isLoading ? <CircularProgress size="30px"/> : numberOfActiveOrders,
     color: 'rgb(244, 216, 244)',
     icon: <ShoppingCartIcon sx={{color: "purple", height: 40, width: 40}}/>,
   },
   {
     title: 'Delivered Orders',
-    value: numberOfDeliveredOrders,
+    value: deliveredOrders.isLoading ? <CircularProgress size="30px"/> : numberOfDeliveredOrders,
     color: 'rgb(183, 247, 183)',
     icon: <CardGiftcardIcon sx={{color: "green", height: 40, width: 40}}/>,
   },
@@ -66,13 +68,13 @@ function DashboardContent() {
   },
   {
     title: 'Clients',
-    value: numberOfClients,
+    value: clients.isLoading ? <CircularProgress size="30px"/> : numberOfClients,
     color: '#D5E8FC',
     icon: <AccountBoxIcon sx={{color: "#0F7BE6", height: 40, width: 40}}/>,
   },
   {
-    title: 'Drivers/Car Owners',
-    value: numberOfTruckOwners,
+    title: 'Truck Owners',
+    value: truckOwners.isLoading ? <CircularProgress size="30px"/> : numberOfTruckOwners,
     color: '#B0CAE6',
     icon: <AccountBoxOutlinedIcon sx={{color: "#0D5DAE", height: 40, width: 40}}/>,
   },

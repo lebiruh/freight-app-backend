@@ -21,6 +21,9 @@ import CustomerRegisterClient from "./components/AdminPanel/CustomerRegisterClie
 import CustomerRegisterTruck from "./components/AdminPanel/CustomerRegisterTruck";
 import CustomerRegisterTruckOwner from "./components/AdminPanel/CustomerRegisterTruckOwner";
 import CustomerTrucks from "./components/AdminPanel/CustomerTrucks";
+import EditorLoginPage from "./pages/EditorLoginPage/EditorLoginPage";
+import AdminEditorProtectedRoute from "./components/ProtectedRoutes/AdminEditorProtectedRoute";
+import CustomerSignout from "./pages/CustomerSignOutPage/CustomerSignout";
 
 
 const Routing = () => {
@@ -28,37 +31,40 @@ const Routing = () => {
     <Routes>
 
       <Route path="/user/login" element={<CustomerLoginPage />} />
+      <Route path="/editor/login" element={<EditorLoginPage />} />      
 
       <Route path="/" element={<CustomerPage/>}>
         <Route path="" element={<CustomerHomePage/>} />
         <Route path="/job-details/:jobId" element={<CustomerJobDetailsPage/>} />
         <Route path="/about" element={<CustomerAboutPage/>}/>
         <Route path="/contact" element={<CustomerContactPage/>}/>
-      </Route>      
-      <Route path="/admin" element={<AdminPanelMain/>}>
-          <Route path="" element={<DashboardContent/>} />
-          <Route path="orders/pending"element={<OrdersPending/>} />
-          <Route path="orders/active"element={<OrdersActive/>} />
-          <Route path="orders/delivered"element={<OrdersDelivered/>} />
-          <Route path="orders/cancelled"element={<OrdersCancelled/>} />
-          <Route path="customers/clients"element={<CustomersClients/>} />
-          <Route path="customer/register/client"element={<CustomerRegisterClient/>} />
-          <Route path="customers/team"element={<CustomersDrivers/>} />
-          <Route path="customers/team/trucks"element={<CustomerTrucks/>} />
-          <Route path="customer/register/truck"element={<CustomerRegisterTruck/>} />
-          <Route path="customer/register/truck-owner"element={<CustomerRegisterTruckOwner/>} />
-          <Route path="reports/sales"element={<Sales/>} />
-          <Route path="dispatch"element={<Dispatch/>} />
-          <Route path="dispatch/:freightId"element={<Dispatch/>} />
-          <Route path="settings/profile"element={<Sales/>} />
+      </Route>
+      <Route element={<AdminEditorProtectedRoute/>}>      
+        <Route path="/admin" element={<AdminPanelMain/>}>
+            <Route path="" element={<DashboardContent/>} />
+            <Route path="orders/pending"element={<OrdersPending/>} />
+            <Route path="orders/active"element={<OrdersActive/>} />
+            <Route path="orders/delivered"element={<OrdersDelivered/>} />
+            <Route path="orders/cancelled"element={<OrdersCancelled/>} />
+            <Route path="customers/clients"element={<CustomersClients/>} />
+            <Route path="customer/register/client"element={<CustomerRegisterClient/>} />
+            <Route path="customers/team"element={<CustomersDrivers/>} />
+            <Route path="customers/team/trucks"element={<CustomerTrucks/>} />
+            <Route path="customer/register/truck"element={<CustomerRegisterTruck/>} />
+            <Route path="customer/register/truck-owner"element={<CustomerRegisterTruckOwner/>} />
+            <Route path="reports/sales"element={<Sales/>} />
+            <Route path="dispatch"element={<Dispatch/>} />
+            <Route path="dispatch/:freightId"element={<Dispatch/>} />
+            <Route path="settings/profile"element={<Sales/>} />
+        </Route>
       </Route>
 
       <Route element={<CustomerProtectedRoute/>}>
         <Route path="/user" element={<CustomerPage/>}>
           <Route path="order-freight" element={<CustomerFreightRequestPage/>} />
+          <Route path="signout" element={<CustomerSignout />} />
         </Route>
       </Route>
-
 
     </Routes>
   )
