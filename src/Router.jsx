@@ -24,6 +24,7 @@ import CustomerTrucks from "./components/AdminPanel/CustomerTrucks";
 import EditorLoginPage from "./pages/EditorLoginPage/EditorLoginPage";
 import AdminEditorProtectedRoute from "./components/ProtectedRoutes/AdminEditorProtectedRoute";
 import CustomerSignout from "./pages/CustomerSignOutPage/CustomerSignout";
+import AdminSignoutPage from "./pages/AdminSignoutPage/AdminSignoutPage";
 
 
 const Routing = () => {
@@ -56,6 +57,7 @@ const Routing = () => {
             <Route path="dispatch"element={<Dispatch/>} />
             <Route path="dispatch/:freightId"element={<Dispatch/>} />
             <Route path="settings/profile"element={<Sales/>} />
+            <Route path="settings/signout" element={<AdminSignoutPage />} />
         </Route>
       </Route>
 

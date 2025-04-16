@@ -166,7 +166,7 @@ const NAVIGATION = [
         icon: <DescriptionIcon />,
       }, 
       {
-        segment: '',
+        segment: 'signout',
         title: 'Sign out',
         icon: <DescriptionIcon />,
       }, 
