@@ -8,6 +8,7 @@ import "./editorLoginForm.css"
 
 import { CgDanger } from "react-icons/cg";
 import { EditorLogin } from "../../../helpers/Login";
+import "./editorLoginForm.css"
 
 const EditorLoginForm = () => {
 

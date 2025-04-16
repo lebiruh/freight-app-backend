@@ -1,7 +1,7 @@
 
 
-import EditorLoginForm from '../../components/AdminPanel/EditorLoginForm/EditorLoginForm'
-import EditorLoginHeader from '../../components/AdminPanel/EditorLoginForm/editorLoginHeader'
+import EditorLoginForm from "../../components/AdminPanel/EditorLoginForm/EditorLoginForm"
+import EditorLoginHeader from "../../components/AdminPanel/EditorLoginForm/EditorLoginHeader"
 
 const EditorLoginPage = () => {
   return (
