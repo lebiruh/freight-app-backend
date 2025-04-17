@@ -15,7 +15,7 @@ const OrdersAvailable = () => {
 
   const data = query?.data
   
-  console.log("Delivered orders for admin are: ", data);
+  // console.log("Delivered orders for admin are: ", data);
 
   const rows = data?.map((value,idx) => { 
                   let id = idx + 1;

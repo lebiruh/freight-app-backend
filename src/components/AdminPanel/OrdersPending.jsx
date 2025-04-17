@@ -28,14 +28,14 @@ const OrdersPending = () => {
 
   const data = query?.data
   
-  console.log("Pending orders for admin are: ", data);
+  // console.log("Pending orders for admin are: ", data);
 
   const rows = data?.map((value,idx) => { 
                   let id = idx + 1;
                   return {...value, id};
                 })
 
-  console.log("Rows Pending orders for admin are: ", rows);
+  // console.log("Rows Pending orders for admin are: ", rows);
   const queryClient = useQueryClient();
 
   const deleteOrder = useMutation({

@@ -14,7 +14,7 @@ const OrdersCancelled = () => {
 
   const data = query?.data
   
-  console.log("Pending orders for admin are: ", data);
+  // console.log("Pending orders for admin are: ", data);
 
   const rows = data?.map((value,idx) => { 
                   let id = idx + 1;

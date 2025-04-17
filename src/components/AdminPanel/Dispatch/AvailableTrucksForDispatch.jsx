@@ -16,8 +16,8 @@ import { upDateOrderByStatus } from '../../../helpers/Orders';
 const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
 
 
-  console.log("truckByType is: ", truckByType);
-  console.log("clientId is: ", clientId);
+  // console.log("truckByType is: ", truckByType);
+  // console.log("clientId is: ", clientId);
 
   
   const active = actions.active
@@ -86,7 +86,7 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
               <div to='#' style={{border: 'none', borderRadius:'5px', padding: '2px', backgroundColor: '#3bb077', width: '180px', height: '30px', color: 'white'}}>
                 <button style={{width: '90%', height: '90%', cursor: 'pointer'}} onClick={handleButtonClick}>
                   {
-                    updateTruckandOrderAvailability.isLoading ? <CircularProgress size="20px"/> : "Assign job"
+                    updateTruckandOrderAvailability.isLoading ? <CircularProgress size="16px"/> : "Assign job"
                   }
                 </button>
               </div>

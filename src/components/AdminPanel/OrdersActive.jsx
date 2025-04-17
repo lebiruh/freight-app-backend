@@ -22,7 +22,7 @@ const OrdersActive = () => {
 
   const activeOrders = query?.data
   
-  console.log("Active orders for admin are: ", activeOrders);
+  // console.log("Active orders for admin are: ", activeOrders);
 
   const completed = actions.completed
 
