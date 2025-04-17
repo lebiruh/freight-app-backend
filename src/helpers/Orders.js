@@ -47,6 +47,27 @@ export const getOrders = async (status) => {
 
 };
 
+export const getOrdersSalesData = async (status) => {
+
+  // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
+
+  // const token = userData?.token
+
+  try {
+    const response = await axios.get(`${baseURL}/api/orders/sales/${status}`);
+
+    const posts = response.data;
+    // console.log("All pending order on helper is: ");
+    return posts;
+
+  } catch (error) {
+    console.log(error);
+    const errorData = error.response.data;
+    throw new Error(errorData.message || 'Fetching pending orders failed.');
+  }
+
+};
+
 export const getPendingOrdersById = async (jobId) => {
 
   // const userData = JSON.parse(localStorage.getItem('familyShareAuthData'))
