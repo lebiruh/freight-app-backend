@@ -30,12 +30,14 @@ function DashboardContent() {
   const pendingOrders = useQuery({ queryKey: ['pending'], queryFn: () => getOrders('pending') })
   const activeOrders = useQuery({ queryKey: ['in_transit'], queryFn: () => getOrders('in_transit') })
   const deliveredOrders = useQuery({ queryKey: ['completed'], queryFn: () => getOrders('completed') })
+  const cancelledOrders = useQuery({ queryKey: ['cancelled'], queryFn: () => getOrders('cancelled') })
   const clients = useQuery({ queryKey: ['clients'], queryFn: () => getUsersByRole("client") })
   const truckOwners = useQuery({ queryKey: ['truckOwners'], queryFn: () => getUsersByRole("truck_owner") })
 
   const numberOfPendingOrders = !pendingOrders.isLoading && pendingOrders && pendingOrders?.data.length
   const numberOfActiveOrders = !activeOrders.isLoading && activeOrders && activeOrders?.data.length
   const numberOfDeliveredOrders = !deliveredOrders.isLoading && deliveredOrders && deliveredOrders?.data.length
+  const numberOfCancelledOrders = !cancelledOrders.isLoading && cancelledOrders && cancelledOrders?.data.length
   const numberOfClients = !clients.isLoading && clients && clients?.data.length
   const numberOfTruckOwners = !truckOwners.isLoading && truckOwners && truckOwners?.data.length
 
@@ -62,7 +64,7 @@ function DashboardContent() {
   },
   {
     title: 'Cancelled Orders',
-    value: '2',
+    value: cancelledOrders.isLoading ? <CircularProgress size="30px"/> : numberOfCancelledOrders,
     color: 'rgb(246, 178, 178)',
     icon: <RemoveShoppingCartOutlinedIcon sx={{color: "red", height: 40, width: 40}}/>,
   },

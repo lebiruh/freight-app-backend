@@ -1,5 +1,7 @@
 import {
-  useQuery
+  useQuery,
+  useQueryClient, 
+  useMutation
 } from '@tanstack/react-query';
 
 import { Link } from "react-router";
@@ -8,15 +10,19 @@ import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-import {getOrders} from '../../helpers/Orders'
+import {getOrders, upDateOrderByStatus} from '../../helpers/Orders'
 import { grey } from '@mui/material/colors';
+
+import {actions} from "../Actions/actions"
 
 
 
 const OrdersPending = () => {
 
   // const jobStatus = {status: 'pending'}
+  const cancelled = actions.cancelled
 
   const query = useQuery({ queryKey: ['pending'], queryFn: () => getOrders('pending') })
 
@@ -29,7 +35,26 @@ const OrdersPending = () => {
                   return {...value, id};
                 })
 
-  // console.log("Rows Pending orders for admin are: ", rows);
+  console.log("Rows Pending orders for admin are: ", rows);
+  const queryClient = useQueryClient();
+
+  const deleteOrder = useMutation({
+    mutationFn: (data) => {
+      upDateOrderByStatus({action: data.cancelled, id: data.freightId, truckId: data.truckId})
+    },
+
+    onSuccess: () => {
+      alert('Successfully deleted!')
+      queryClient.invalidateQueries({queryKey: ['pending']})
+      // queryClient.invalidateQueries({queryKey: ['in_transit']})
+      queryClient.invalidateQueries({queryKey: ['cancelled']})
+      // navigate(`/admin/orders/pending`);
+    },
+  })
+
+  const handleDeleteClick = (freightId) => {
+    deleteOrder.mutate({truckId: '', cancelled: cancelled, freightId: freightId});
+  }
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 50, hide: 'true' },
@@ -103,7 +128,8 @@ const OrdersPending = () => {
           <>            
             <Link to={`/admin/dispatch/${params.row?.freightId}`} >
               <DirectionsCarFilledIcon sx={{ cursor: 'pointer'}} color="primary"/>
-            </Link>            
+            </Link>
+            <span style={{marginLeft: '15px', cursor: 'pointer', color: 'red'}} onClick={() => handleDeleteClick(params.row?.freightId)}><DeleteForeverIcon /></span>            
           </>
         );
       },
