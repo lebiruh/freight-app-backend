@@ -7,7 +7,7 @@ const WeightInput = ({name, value, handleChange, handleWeightUnitChange}) => {
   const {t} = useTranslation();
 
   const options = [
-    { value: 'kg', label: 'kg' },
+    // { value: 'qtl', label: 'qtl' },
     { value: 'qtl', label: 'qtl' }
   ]
 
@@ -35,14 +35,6 @@ const WeightInput = ({name, value, handleChange, handleWeightUnitChange}) => {
       <GiWeight /> 
       <input type="number" name={name} value={value} onChange={handleChange} placeholder={t("orderFreight.weight")} className='bg-transparent w-2/3 outline-none' />
       <Select options={options} onChange={handleWeightUnitChange} styles={customStyles} className='w-1/3'/>
-      {/* <select id="truck" name={name} value={value} onChange={handleChange} className='bg-transparent w-full outline-none'>
-        {
-          options.map((item, i) => {
-            return <option key={i} value={item}>{item}</option>
-          })
-        }
-      </select> */}
-      {/* <input type="tel" placeholder='Phone No' className='bg-transparent w-full outline-none' /> */}
     </div>
   )
 }

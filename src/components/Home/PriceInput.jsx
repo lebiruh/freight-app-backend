@@ -8,7 +8,7 @@ const PriceInput = ({name, value, handleChange, handlePriceUnitChange}) => {
   const {t} = useTranslation();
 
   const options = [
-    { value: 'kg', label: 'per kg' },
+    // { value: 'kg', label: 'per kg' },
     { value: 'qtl', label: 'per qtl' },
     { value: 'trip', label: 'per trip' },
   ]

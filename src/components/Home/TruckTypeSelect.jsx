@@ -5,12 +5,12 @@ const TruckTypeSelect = ({handleTruckChange}) => {
 
 
   const options = [
-    { value: 'TRAILER', label: 'TRAILER' },
-    { value: 'SINO', label: 'SINO' },
-    { value: 'ISUZU', label: 'ISUZU' },
-    { value: 'HIGHBED', label: 'HIGHBED' },
-    { value: 'LOWBED', label: 'LOWBED' },
-    
+    { label: 'TRAILER', value: 'TRAILER' },
+    { label: 'CASONI', value: 'CASONI' },
+    { label: 'ISUZU', value: 'ISUZU' },
+    { label: 'FSR', value: 'FSR' },
+    { label: 'HIGHBED', value: 'HIGHBED' },
+    { label: 'LOWBED', value: 'LOWBED' },    
   ]
 
   const customStyles = {
@@ -24,13 +24,6 @@ const TruckTypeSelect = ({handleTruckChange}) => {
     option: (provided) => ({...provided})
   }
 
-  // const options = [
-  //   'SINO',
-  //   'ISUZU',
-  //   'HIGHBED',
-  //   'LOWBED'
-  // ]
-
 
 
 
@@ -38,14 +31,6 @@ const TruckTypeSelect = ({handleTruckChange}) => {
     <div className='bg-slate-200 p-3 rounded-lg mt-3 flex items-center gap-4'>
       <PiTruckTrailerFill /> 
       <Select options={options} id="truck" onChange={handleTruckChange} styles={customStyles} className='w-full'/>
-      {/* <select id="truck" name={name} value={value} onChange={handleChange} className='bg-transparent w-full outline-none'>
-        {
-          options.map((item, i) => {
-            return <option key={i} value={item}>{item}</option>
-          })
-        }
-      </select> */}
-      {/* <input type="tel" placeholder='Phone No' className='bg-transparent w-full outline-none' /> */}
     </div>
   )
 }
