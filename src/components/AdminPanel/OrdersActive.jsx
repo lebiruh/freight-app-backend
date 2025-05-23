@@ -7,7 +7,7 @@ import {
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import {Box, IconButton} from '@mui/material';
 
-import {getOrders, upDateOrderByStatus} from '../../helpers/Orders'
+import {getOrders, upDateBookingByStatus, upDateOrderByStatus} from '../../helpers/Orders'
 import {actions} from "../Actions/actions"
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
@@ -22,7 +22,7 @@ const OrdersActive = () => {
 
   const activeOrders = query?.data
   
-  // console.log("Active orders for admin are: ", activeOrders);
+  console.log("Active orders for admin are: ", activeOrders);
 
   const completed = actions.completed
 
@@ -30,12 +30,16 @@ const OrdersActive = () => {
 
   // const freightId = activeOrders?.freightId
 
+  // const freightId = activeOrders?.Id
+
   // const dataForbackEnd = { completed: completed, freightId: freightId}
 
   const updateTruckandOrderAvailability = useMutation({
     mutationFn: (data) => {
       // await upDateTruckAvailability(data.truckId)
-      upDateOrderByStatus({action: data.completed, id: data.freightId, truckId: data.truckId})
+      // upDateOrderByStatus({action: data.completed, id: data.freightId, truckId: data.truckId})
+
+      upDateBookingByStatus({action: data.completed, id: data.freightId, truckId: data.truckId, bookingId: data.bookingId})
     },
 
     onSuccess: () => {
@@ -46,8 +50,8 @@ const OrdersActive = () => {
     },
   })
 
-  const handleButtonClick = (freightId, truckId) => {
-    updateTruckandOrderAvailability.mutate({ completed: completed, freightId: freightId, truckId: truckId});
+  const handleButtonClick = (freightId, truckId, bookingId) => {
+    updateTruckandOrderAvailability.mutate({ completed: completed, freightId: freightId, truckId: truckId, bookingId: bookingId});
   }
 
   const rows = activeOrders?.map((value,idx) => { 
@@ -137,7 +141,7 @@ const OrdersActive = () => {
       // height: 50,
       renderCell: (params) => {
         return (
-          <IconButton sx={{m:1}} onClick={() => handleButtonClick(params.row.freightId, params.row.truckId)}>
+          <IconButton sx={{m:1}} onClick={() => handleButtonClick(params.row.freightId, params.row.truckId, params.row.bookingId)}>
             <DoneAllIcon color='primary'/>
           </IconButton>
         );

@@ -94,6 +94,12 @@ const OrdersPending = () => {
       editable: true,
     },
     {
+      field: 'remaining_weight',
+      headerName: 'Remaining Weight',
+      width: 125,
+      editable: true,
+    },
+    {
       field: 'price',
       headerName: 'Unit Price',
       width: 125,

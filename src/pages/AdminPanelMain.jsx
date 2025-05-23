@@ -22,6 +22,9 @@ import { PageContainer } from '@toolpad/core/PageContainer';
 import { Outlet } from 'react-router';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 
+import AbayTransLogoWhite from '../assets/abayTransLogoWhite.jpg'
+import AbayTransLogo from '../assets/abayTransLogo.jpg'
+
 
 const NAVIGATION = [
   {
@@ -175,6 +178,10 @@ const NAVIGATION = [
 ];
 
 
+export const Logo = () => {
+  return <img src={AbayTransLogo} alt="Logo" className='block h-12 w-12 rounded-full'/>
+}
+
 
 function AdminPanelMain() {
 
@@ -185,7 +192,8 @@ function AdminPanelMain() {
       // theme={demoTheme}
       // window={demoWindow}
       branding={{
-        title: "Freight App"
+        title: "AbayTrans",
+        logo: <Logo />
       }}
     >
       <DashboardLayout >

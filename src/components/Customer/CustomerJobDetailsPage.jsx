@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Typography,
     Paper,
@@ -16,7 +16,12 @@ import Grid from '@mui/material/Grid';
 
 import {useTranslation} from "react-i18next"
 
+import CustomMapSection from '../Home/CustomMapSection';
+
 const CustomerJobDetailsPage = () => {
+
+    const [start, setStart] = useState(null)
+    const [end, setEnd] = useState(null);
 
     const { jobId } = useParams();
     const navigate = useNavigate();
@@ -32,8 +37,25 @@ const CustomerJobDetailsPage = () => {
 
     const { data: job, isLoading, isError, error } = query;
 
-    // console.log("Job detail is: ", job);
+    console.log("Job detail is: ", job);
     // console.log("Job id is: ", jobId);
+
+    function setCoordinates () {
+        setStart([parseFloat(job[0]?.start_lat), parseFloat(job[0]?.start_lon)]);
+        setEnd([parseFloat(job[0]?.end_lat), parseFloat(job[0]?.end_lon)]);
+    }
+
+
+    useEffect(() => {
+
+      if (job && job.length > 0) {
+            setStart([parseFloat(job[0]?.start_lat), parseFloat(job[0]?.start_lon)]);
+            setEnd([parseFloat(job[0]?.end_lat), parseFloat(job[0]?.end_lon)]);
+        }
+    }, [job])
+
+    console.log("start is: ", start);
+    console.log("end is: ", end);
 
     const handleGoBack = () => {
         navigate('/'); // Or navigate(-1) to go back to the previous page
@@ -114,10 +136,11 @@ const CustomerJobDetailsPage = () => {
                         <Button className="ml-2">
                             Contact Agent:
                         </Button>
-                        <Button className="ml-2">0911234567 / 0911*******</Button>
+                        <Button className="ml-2">0911007388</Button>
                     </Grid>
                 </Grid>
             </Paper>
+            <CustomMapSection start={start} end={end}/>
         </div>
     );
 };

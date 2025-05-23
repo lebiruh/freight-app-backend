@@ -46,9 +46,14 @@ const Dispatch = () => {
 
   const clientId = !isLoading && job && job[0]?.clientId
 
+  const totalWeight = !isLoading && job && job[0]?.weight
+
+  // console.log("total weight is: ", totalWeight);
+
   const truckByType = useQuery({
       queryKey: ['available', jobId], // Include truckType in the query key for unique fetching
-      queryFn: () => getTrucksByTruckType(truckType),
+      // queryFn: () => getTrucksByTruckType(truckType), // Get trucks by truck type
+      queryFn: () => getTrucksByTruckType(totalWeight), // Get trucks by carrying capacity and Total requested weight
       enabled: !!truckType,
       onError: (error) => {
         console.error("Error fetching trucks:", error);

@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 // import { motion } from 'framer-motion';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-// import ShoaLogo from "../../assets/shoa_homes_logo.jpg"
+import AbayTransLogo from "../../assets/abayTransLogo.jpg"
 import "./CustomerNavbar.css"
 import {useLocation} from "react-router";
 
@@ -91,7 +91,7 @@ const Navbar = () => {
       {/* Spinner End */}
 
       {/* Tailwind Navbar start */}
-      <Disclosure as="nav" className="bg-custom-primary sticky top-0 z-30">
+      <Disclosure as="nav" className="bg-custom-primary sticky top-0 z-10000">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -112,14 +112,14 @@ const Navbar = () => {
                 //   staggerChildren: 0.15
                 // }}
                 className="flex shrink-0 items-center hover:cursor-pointer">
-                {/* <img
+                <img
                   alt="Shoa Homes"
                   // src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                  src={ShoaLogo}
-                  className="block h-12 w-14"
-                /> */}
-                <h1 className="text-[20px] font-bold text-gray-200">
-                  FREIGHT APP
+                  src={AbayTransLogo}
+                  className="block h-10 w-10 mr-2 rounded-full"
+                />
+                <h1 className="hidden sm:block text-[20px] font-bold text-gray-200">
+                  AbayTrans
                 </h1>
               </div>
             </div>

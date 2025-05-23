@@ -24,14 +24,16 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
 
   const truckId = truckByType?.truckId
 
+  const loadAmount = truckByType?.load_amount
+
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
   const updateTruckandOrderAvailability = useMutation({
     mutationFn: async (data) => {
-      await upDateTruckAvailability(data.truckId)
-      await upDateOrderByStatus({action: data.active, id: data.freightId, truckId: data.truckId})
+      // await upDateTruckAvailability(data.truckId)
+      await upDateOrderByStatus({action: data.active, id: data.freightId, truckId: data.truckId, loadAmount: data.loadAmount})
     },
 
     onSuccess: () => {
@@ -43,7 +45,7 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
   })
 
   const handleButtonClick = async () => {
-    await updateTruckandOrderAvailability.mutateAsync({truckId: truckId, active: active, freightId: freightId});
+    await updateTruckandOrderAvailability.mutateAsync({truckId: truckId, active: active, freightId: freightId, loadAmount: loadAmount});
   }
 
   if(truckByType?.isError) {
@@ -55,7 +57,7 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
       
       <div style={{display: 'flex'}}>
           <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
                   Plate No:
               </Typography>
@@ -64,7 +66,16 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
                   {`${truckByType.license_plate}`}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
+                  Truck Type:
+              </Typography>
+              <Typography>
+                  {/* You can add more specific details here based on your job object */}
+                  {`${truckByType.truck_type}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
                   Owner Name:
               </Typography>
@@ -73,7 +84,7 @@ const AvailablerTrucksForDispatch = ({truckByType, freightId, clientId}) => {
                   {`${truckByType.owner_name} ${truckByType.owner_lastname}`}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold'}}>
                   Phone No:
               </Typography>

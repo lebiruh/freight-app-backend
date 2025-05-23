@@ -4,8 +4,8 @@ import InputItem from "./InputItem"
 import TruckTypeSelect from "./TruckTypeSelect"
 import WeightInput from "./WeightInput"
 import PriceInput from "./PriceInput"
-import SourceLocationInput from "./SourceLocationInput"
-import DestinationLocationInput from "./DestinationLocationInput"
+// import SourceLocationInput from "./SourceLocationInput"
+// import DestinationLocationInput from "./DestinationLocationInput"
 import {
   useMutation,
   useQueryClient,
@@ -14,12 +14,16 @@ import { addOrder } from "../../helpers/Orders"
 
 import { CgDanger } from "react-icons/cg";
 import CustomerFreightRequestModal from "../Customer/CustomerFreightRequestModal"
+import CustomSourceLocationInput from "./CustomSourceLocationInput"
+import CustomDestinationLocationInput from "./CustomeDestinationLocationInput"
 
 
 
-const SearchSection = () => {
+const SearchSection = ({setStart, setEnd}) => {
 
   const [open, setOpen] = useState(false)
+  // const [start, setStart] = useState(null);
+  // const [end, setEnd] = useState(null);
 
   const [order, setOrder] = useState({
     userId:'', 
@@ -27,15 +31,19 @@ const SearchSection = () => {
     // phone: '', 
     truck: '', 
     weight: '', 
-    weightUnit:'', 
+    weightUnit:'',
     status: 'pending', 
     source: '', 
     destination: '', 
     price: '', 
-    priceUnit: ''
+    priceUnit: '',
+    sourceLat: '',
+    sourceLon: '',
+    destinationLat: '',
+    destinationLon: ''
   })
 
-  const [cities, setCities] = useState([]);
+  // const [cities, setCities] = useState([]);
 
   // const [nameInputError, setNameInputError] = useState(false);
   // const [phoneInputError, setPhoneInputError] = useState(false);
@@ -51,8 +59,8 @@ const SearchSection = () => {
   const CustomerData = JSON.parse(localStorage.getItem('customerData'))
 
   // console.log("Customer Data is", CustomerData);
-  const stateCityAPI = import.meta.env.VITE_COUNTRY_STATE_CITY_API_KEY
-  const stateCityURL = import.meta.env.VITE_STATE_CITY_URL
+  // const stateCityAPI = import.meta.env.VITE_COUNTRY_STATE_CITY_API_KEY
+  // const stateCityURL = import.meta.env.VITE_STATE_CITY_URL
 
   useEffect(() => {
     if(CustomerData) {
@@ -60,47 +68,47 @@ const SearchSection = () => {
     }
   }, [])
 
-  useEffect(() => {
-    // var requestOptions = {
-    //   method: 'GET',
-    //   headers: {"X-CSCAPI-KEY": country_State_City_API_KEY},
-    //   redirect: 'follow'
-    // };
+  // useEffect(() => {
+  //   // var requestOptions = {
+  //   //   method: 'GET',
+  //   //   headers: {"X-CSCAPI-KEY": country_State_City_API_KEY},
+  //   //   redirect: 'follow'
+  //   // };
 
-    const fetchCities = async () => {
-      try {
-        const response = await fetch(
-          stateCityURL,
-          {
-            method: 'GET',
-            headers: {
-              'X-CSCAPI-KEY': stateCityAPI,
-            },
-            redirect: 'follow',
-          }
-        );
+  //   const fetchCities = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         stateCityURL,
+  //         {
+  //           method: 'GET',
+  //           headers: {
+  //             'X-CSCAPI-KEY': stateCityAPI,
+  //           },
+  //           redirect: 'follow',
+  //         }
+  //       );
 
-      const result = await response.json(); // Parse the JSON here   
+  //     const result = await response.json(); // Parse the JSON here   
 
-      let cityNames = [];
-      if (Array.isArray(result)) {
-        // console.log("result is: ", result.length);
-        for (let i = 0; i < result.length; i++) {
-          if (result[i]?.name) {
-            cityNames.push({ label: result[i].name, value: result[i].name });
-          }
-        }
-        setCities(cityNames);
-        // console.log(cityNames);
-      } else {
-        console.warn('API response is not an array:', result);
-      }
-      } catch (error) {
-        console.error('Fetch Error:', error);
-      }
-    };
-    fetchCities();
-  }, [])
+  //     let cityNames = [];
+  //     if (Array.isArray(result)) {
+  //       // console.log("result is: ", result.length);
+  //       for (let i = 0; i < result.length; i++) {
+  //         if (result[i]?.name) {
+  //           cityNames.push({ label: result[i].name, value: result[i].name });
+  //         }
+  //       }
+  //       setCities(cityNames);
+  //       // console.log(cityNames);
+  //     } else {
+  //       console.warn('API response is not an array:', result);
+  //     }
+  //     } catch (error) {
+  //       console.error('Fetch Error:', error);
+  //     }
+  //   };
+  //   fetchCities();
+  // }, [])
 
   const queryClient = useQueryClient()
 
@@ -120,7 +128,11 @@ const SearchSection = () => {
       source: '', 
       destination: '', 
       price: '', 
-      priceUnit: ''
+      priceUnit: '',
+      sourceLat: '',
+      sourceLon: '',
+      destinationLat: '',
+      destinationLon: ''
     })
   }
 
@@ -171,7 +183,7 @@ const SearchSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Order submitted is: ", order);
+    // console.log("Order submitted is: ", order);
 
     if (order.name === "") {
       // setNameInputError(true);
@@ -289,7 +301,7 @@ const SearchSection = () => {
     
     // addOrderMutation.mutate(order);
     // clearOrder();
-
+    // console.log("order is: ", order);
     setOpen(true);
 
   }
@@ -297,7 +309,7 @@ const SearchSection = () => {
 
   return (
     <div className="p-2 md:p-5 border-[2px] rounded-xl border-gray-200">
-      <CustomerFreightRequestModal open={open} setOpen={setOpen} order={order} addOrderMutation={addOrderMutation} clearOrder={clearOrder}/>
+      <CustomerFreightRequestModal open={open} setOpen={setOpen} order={order} addOrderMutation={addOrderMutation} clearOrder={clearOrder} setStart={setStart} setEnd={setEnd}/>
       <p className="text-[20px] font-bold">Submit Order</p>
 
       <form action="">
@@ -316,13 +328,15 @@ const SearchSection = () => {
         <TruckTypeSelect handleTruckChange={handleTruckChange} />
         {truckInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please select the type of truck. </div>}
 
-        <SourceLocationInput options={cities} handleSourceChange={handleSourceChange}/>
+        {/* <SourceLocationInput options={cities} handleSourceChange={handleSourceChange}/> */}
+        <CustomSourceLocationInput placeholder="Start location" onSelect={setStart} setOrder={setOrder} handleSourceChange={handleSourceChange} order={order}/>
         {sourceInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter source of freight. </div>}
 
         {/* <InputItem type='source' name='source' value={order.source} handleChange={handleChange}/>
         {sourceInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter source of freight. </div>} */}
 
-        <DestinationLocationInput options={cities} handleDestinationChange={handleDestinationChange}/>
+        {/* <DestinationLocationInput options={cities} handleDestinationChange={handleDestinationChange}/> */}
+        <CustomDestinationLocationInput placeholder="Dropoff location" onSelect={setEnd} setOrder={setOrder} handleDestinationChange={handleDestinationChange}/>
         {destinationInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter destination of freight. </div>}
 
 
@@ -331,7 +345,7 @@ const SearchSection = () => {
 
         {/* <InputItem type='price' name='price' value={order.price} handleChange={handleChange}/> */}
         <PriceInput type='price' name='price' value={order.price} handleChange={handleChange} handlePriceUnitChange={handlePriceUnitChange}/>
-        {priceInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter the orice of freight. </div>}
+        {priceInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please enter the price of freight. </div>}
         {priceUnitInputError && <div style={{color: "red", fontSize: "14px", fontWeight:"500", display: "flex", alignItems: "center", gap: "4px"}}> <CgDanger /> Please select unit price. </div>}
 
         <button className="bg-black w-full text-white rounded-lg mt-5 p-3 cursor-pointer" onClick={handleSubmit}>Submit</button>
