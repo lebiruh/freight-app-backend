@@ -118,7 +118,7 @@ const CustomMapSection = ({start, end}) => {
         }
 
         {
-          route.length > 0 && <Polyline positions={route} color="black" />
+          route.length > 0 && <Polyline positions={route} color="blue" />
         }
 
       </MapContainer>
