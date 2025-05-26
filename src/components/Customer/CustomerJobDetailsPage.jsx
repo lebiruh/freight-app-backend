@@ -37,13 +37,13 @@ const CustomerJobDetailsPage = () => {
 
     const { data: job, isLoading, isError, error } = query;
 
-    console.log("Job detail is: ", job);
+    // console.log("Job detail is: ", job);
     // console.log("Job id is: ", jobId);
 
-    function setCoordinates () {
-        setStart([parseFloat(job[0]?.start_lat), parseFloat(job[0]?.start_lon)]);
-        setEnd([parseFloat(job[0]?.end_lat), parseFloat(job[0]?.end_lon)]);
-    }
+    // function setCoordinates () {
+    //     setStart([parseFloat(job[0]?.start_lat), parseFloat(job[0]?.start_lon)]);
+    //     setEnd([parseFloat(job[0]?.end_lat), parseFloat(job[0]?.end_lon)]);
+    // }
 
 
     useEffect(() => {
@@ -54,8 +54,8 @@ const CustomerJobDetailsPage = () => {
         }
     }, [job])
 
-    console.log("start is: ", start);
-    console.log("end is: ", end);
+    // console.log("start is: ", start);
+    // console.log("end is: ", end);
 
     const handleGoBack = () => {
         navigate('/'); // Or navigate(-1) to go back to the previous page
